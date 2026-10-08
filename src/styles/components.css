@@ -98,6 +98,11 @@
 }
 
 /* ---- Hero ---- */
+.hero {
+  display: flex;
+  flex-direction: column;
+  min-height: 100svh;
+}
 .par-bg {
   position: absolute;
   left: 0;
@@ -108,12 +113,13 @@
   will-change: transform;
 }
 .hero-in {
-  padding: 176px 24px 0;
+  width: 100%;
+  padding: 176px 24px 8px;
 }
 .hz {
   position: relative;
   aspect-ratio: 4 / 1;
-  margin-top: 8px;
+  margin-top: auto;
 }
 .hand-l {
   position: absolute;
