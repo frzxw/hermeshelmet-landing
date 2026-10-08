@@ -1,0 +1,47 @@
+---
+import footer from "../assets/footer.webp";
+import { footerLinks, site } from "../data/site";
+import RollButton from "./RollButton.astro";
+---
+
+<section class="sec" style="padding-top:160px;padding-left:16px;padding-right:16px;box-sizing:border-box">
+  <div
+    class="rv"
+    style="position:relative;isolation:isolate;overflow:hidden;border-radius:var(--radius-panel);box-sizing:border-box;max-width:1680px;margin:0 auto;background:#c9bfd6;min-height:760px;display:flex;flex-direction:column;justify-content:space-between;gap:48px;padding:80px clamp(20px,5vw,72px) 20px"
+  >
+    <div
+      class="par-c par-bg"
+      aria-hidden="true"
+      style={`top:-9%;bottom:-9%;z-index:0;background-image:url(${footer.src})`}
+    ></div>
+    <div style="position:relative;z-index:2;max-width:900px">
+      <h2 style="margin:0;font-size:clamp(48px,8vw,96px);line-height:.98">Helmet on. Ship.</h2>
+      <p style="margin:24px 0 0;max-width:460px;font-size:20px;line-height:1.38;font-weight:300;color:var(--graphite)">
+        One command to a Hermes that plans, routes and verifies.
+      </p>
+      <div style="margin-top:36px;display:flex;flex-wrap:wrap;gap:12px">
+        <RollButton href="#top" label="Install Helmet" size="lg" />
+        <RollButton href={site.links.github} label="View on GitHub" variant="light" size="lg" external />
+      </div>
+    </div>
+    <nav
+      aria-label="Footer"
+      style="position:relative;z-index:2;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:4px 28px;padding:14px 28px;border-radius:28px;background:var(--surface)"
+    >
+      {footerLinks.map((l) => (
+        <a
+          class="nav-link"
+          href={l.href}
+          target={"external" in l ? "_blank" : undefined}
+          rel={"external" in l ? "noopener noreferrer" : undefined}
+          style="font-size:15px;font-weight:600"
+        >
+          {l.label}
+        </a>
+      ))}
+    </nav>
+  </div>
+  <p style="margin:20px 0 0;padding-bottom:32px;text-align:center;font-size:12px;line-height:1.33;color:var(--muted)">
+    &copy; 2026 Helmet. An independent open-source project, not affiliated with the Hermes Agent project.
+  </p>
+</section>

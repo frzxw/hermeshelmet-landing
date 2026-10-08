@@ -1,0 +1,47 @@
+---
+import { glyphs, type GlyphName } from "../data/glyphs";
+import { squirclePath } from "../data/squircle";
+
+interface Props {
+  /** Glyph to draw. Ignored when `numeral` is set. */
+  glyph?: GlyphName;
+  /** Draw a step number instead of a glyph. */
+  numeral?: number;
+  size?: number;
+  /** Tile fill. Use white on gray cards and gray on white sections. */
+  bg?: "surface" | "white";
+  class?: string;
+}
+const { glyph, numeral, size = 52, bg = "surface", class: className } = Astro.props;
+const fill = bg === "white" ? "var(--white)" : "var(--surface)";
+---
+
+<span class:list={["tile", className]} style={`width:${size}px;height:${size}px`}>
+  <svg class="pop" viewBox="0 0 56 56" width={size} height={size} aria-hidden="true" style={`--tb:${fill}`}>
+    <path class="tb" d={squirclePath}></path>
+    {numeral !== undefined ? (
+      <text
+        x="28"
+        y="35.8"
+        text-anchor="middle"
+        font-family="Hanken Grotesk Variable, Hanken Grotesk, sans-serif"
+        font-size="22"
+        font-weight="650"
+        fill="currentColor"
+      >
+        {numeral}
+      </text>
+    ) : (
+      <g
+        class="tg"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.3"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        transform="translate(28 28) scale(1.3) translate(-12 -12)"
+        set:html={glyph ? glyphs[glyph] : ""}
+      />
+    )}
+  </svg>
+</span>

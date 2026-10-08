@@ -1,0 +1,36 @@
+/* Design tokens. Monochrome, neutral grays (Mobbin-style). */
+:root {
+  --white: #ffffff;
+  --ink: #0a0a0a;
+  --graphite: #262626;
+  --muted-strong: #525252;
+  --muted: #6b6b6b;
+  --faint: #a3a3a3;
+  --surface: #f5f5f5;
+  --line: #e5e5e5;
+  --line-soft: #ededed;
+  --terminal: #0f0f0f;
+
+  /* Context-bar shades, darkest to lightest */
+  --bar-1: #0a0a0a;
+  --bar-2: #404040;
+  --bar-3: #737373;
+  --bar-4: #a3a3a3;
+  --bar-5: #d4d4d4;
+
+  --radius-panel: 24px;
+  --radius-card: 16px;
+  --radius-pill: 9999px;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --font: "Hanken Grotesk Variable", "Hanken Grotesk", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+@property --num {
+  syntax: "<integer>";
+  initial-value: 83;
+  inherits: false;
+}

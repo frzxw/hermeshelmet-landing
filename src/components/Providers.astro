@@ -1,0 +1,25 @@
+---
+import { providers } from "../data/providers";
+---
+
+<section aria-label="Subscriptions Helmet works with" class="rv" style="margin-top:56px;overflow:hidden">
+  <p style="margin:0;text-align:center;font-size:14px;line-height:1.43;color:var(--muted);padding:0 24px">
+    Use the subscriptions you already pay for.
+  </p>
+  <div class="marquee-wrap" style="margin-top:24px;overflow:hidden">
+    <div
+      class="marquee marquee-slow"
+      style="display:flex;align-items:center;width:max-content;gap:72px;padding-right:72px"
+    >
+      {providers.map((p) => (
+        <span class="lg" role="img" aria-label={p.name} style="display:block;flex:none" set:html={p.svg} />
+      ))}
+      {providers.map((p) => (
+        <span class="lg" aria-hidden="true" style="display:block;flex:none" set:html={p.svg} />
+      ))}
+    </div>
+  </div>
+  <p style="margin:20px 0 0;text-align:center;font-size:12px;line-height:1.33;color:var(--faint);padding:0 24px">
+    Logos belong to their respective owners and are shown to indicate compatibility.
+  </p>
+</section>

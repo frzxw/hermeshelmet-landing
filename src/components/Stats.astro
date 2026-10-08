@@ -1,0 +1,23 @@
+---
+import { stats } from "../data/site";
+const delays = ["rv", "rv rv2", "rv rv3"];
+---
+
+<section class="sec">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:40px 32px">
+    {stats.map((s, i) => (
+      <div class={delays[i]} style="flex:1 1 220px;min-width:0;padding-top:24px;border-top:1px solid var(--line)">
+        {"aria" in s ? (
+          <div role="img" aria-label={s.aria} style="font-size:clamp(52px,8vw,80px);line-height:0.98;font-weight:650">
+            <span aria-hidden="true">
+              ~<span class="cnt"></span>%
+            </span>
+          </div>
+        ) : (
+          <div style="font-size:clamp(52px,8vw,80px);line-height:0.98;font-weight:650">{s.value}</div>
+        )}
+        <p style="margin:16px 0 0;max-width:260px;font-size:16px;line-height:1.4;color:var(--muted)">{s.label}</p>
+      </div>
+    ))}
+  </div>
+</section>

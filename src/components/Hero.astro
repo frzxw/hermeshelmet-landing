@@ -1,0 +1,95 @@
+---
+import hero from "../assets/hero.webp";
+import handHermes from "../assets/hand-hermes.webp";
+import handRobot from "../assets/hand-robot.webp";
+import { site } from "../data/site";
+import CopyButton from "./CopyButton.astro";
+import RollButton from "./RollButton.astro";
+
+const headline = "Put a helmet on Hermes.";
+const words = headline.split(" ");
+---
+
+<section style="position:relative;isolation:isolate;overflow:hidden;margin:-72px auto 0;width:calc(100% - 32px);max-width:1680px;border-radius:var(--radius-panel);box-sizing:border-box;text-align:center;background:#dcebff">
+  <div
+    class="par-h par-bg"
+    aria-hidden="true"
+    style={`top:-12%;bottom:-4%;z-index:0;background-image:url(${hero.src})`}
+  ></div>
+
+  <div
+    class="hero-out hero-in"
+    style="position:relative;z-index:2;max-width:1040px;margin:0 auto;box-sizing:border-box"
+  >
+    <span
+      class="in-up"
+      style="display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:var(--radius-pill);background:var(--surface);font-size:12px;font-weight:600"
+    >
+      Free and open source
+    </span>
+
+    <h1 aria-label={headline} style="margin:28px 0 0;font-size:clamp(44px,8vw,80px);line-height:0.98">
+      {words.map((w, i) => (
+        <>
+          <span class="w" aria-hidden="true">
+            <span class="wi in-word" style={`animation-delay:${(0.1 + i * 0.08).toFixed(2)}s`}>
+              {w}
+            </span>
+          </span>{" "}
+        </>
+      ))}
+    </h1>
+
+    <p
+      class="in-up"
+      style="animation-delay:.55s;margin:28px auto 0;max-width:640px;font-size:20px;line-height:1.38;font-weight:300;color:var(--graphite)"
+    >
+      The batteries-included multi-agent layer for Hermes Agent. Plug in your models and let it plan, route and verify,
+      without burning tokens on the wrong work.
+    </p>
+
+    <div
+      class="in-up"
+      style="animation-delay:.68s;margin-top:40px;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px"
+    >
+      <CopyButton />
+      <RollButton href={site.links.github} label="View on GitHub" variant="light" size="lg" external />
+    </div>
+    <p
+      class="in-up"
+      style="animation-delay:.78s;margin:16px 0 0;font-size:14px;line-height:1.43;color:var(--muted-strong)"
+    >
+      One command. No Hermes needed yet. Works with any model.
+    </p>
+  </div>
+
+  <!-- Hermes' hand meets the machine's -->
+  <div class="hz" style="z-index:2">
+    <div class="hand-l">
+      <div class="near-l">
+        <div class="float">
+          <img
+            src={handHermes.src}
+            width={handHermes.width}
+            height={handHermes.height}
+            alt=""
+            style="display:block;width:100%;height:auto"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="hand-r">
+      <div class="near-r">
+        <div class="float2">
+          <img
+            src={handRobot.src}
+            width={handRobot.width}
+            height={handRobot.height}
+            alt=""
+            style="display:block;width:100%;height:auto"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

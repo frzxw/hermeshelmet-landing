@@ -1,0 +1,34 @@
+---
+interface Props {
+  href: string;
+  label: string;
+  variant?: "dark" | "light";
+  size?: "md" | "lg";
+  external?: boolean;
+}
+const { href, label, variant = "dark", size = "md", external = false } = Astro.props;
+const dark = variant === "dark";
+const h = size === "lg" ? 48 : 44;
+const px = size === "lg" ? 24 : 20;
+const style = [
+  "display:inline-flex;align-items:center",
+  `height:${h}px;padding:0 ${px}px;border-radius:var(--radius-pill);box-sizing:border-box`,
+  dark ? "background:var(--ink);color:var(--white)" : "background:var(--white);color:var(--ink)",
+  "text-decoration:none;font-size:16px;font-weight:600",
+].join(";");
+---
+
+<a
+  class="btn"
+  href={href}
+  style={style}
+  target={external ? "_blank" : undefined}
+  rel={external ? "noopener noreferrer" : undefined}
+>
+  <span class="roll">
+    <span class="roll-in">
+      <span>{label}</span>
+      <span aria-hidden="true">{label}</span>
+    </span>
+  </span>
+</a>

@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import Nav from "../components/Nav.astro";
+import Hero from "../components/Hero.astro";
+import Providers from "../components/Providers.astro";
+import Console from "../components/Console.astro";
+import Statement from "../components/Statement.astro";
+import How from "../components/How.astro";
+import Features from "../components/Features.astro";
+import VerbsMarquee from "../components/VerbsMarquee.astro";
+import Architecture from "../components/Architecture.astro";
+import Stats from "../components/Stats.astro";
+import Faq from "../components/Faq.astro";
+import Closing from "../components/Closing.astro";
+---
+
+<Base>
+  <Nav />
+  <main>
+    <Hero />
+    <Providers />
+    <Console />
+    <Statement />
+    <How />
+    <Features />
+    <VerbsMarquee />
+    <Architecture />
+    <Stats />
+    <Faq />
+  </main>
+  <Closing />
+  <script>
+    import "../scripts/main";
+  </script>
+</Base>

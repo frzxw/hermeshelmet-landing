@@ -1,0 +1,81 @@
+---
+/**
+ * Animated walkthrough of the install. Markup only: src/scripts/stepper.ts
+ * reveals the [data-line] rows and updates the caption and tabs.
+ */
+import { site } from "../data/site";
+
+const tabs = ["Paste", "Set up", "Models", "Start"];
+const tabStyle =
+  "flex:none;height:36px;padding:0 10px;border:0;border-radius:var(--radius-pill);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer";
+---
+
+<div data-stepper style="margin-top:24px">
+  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 12px;margin-bottom:12px">
+    <div
+      role="group"
+      aria-label="Installation steps"
+      style="display:flex;padding:4px;border-radius:var(--radius-pill);background:var(--surface);max-width:100%;overflow-x:auto"
+    >
+      {tabs.map((t, i) => (
+        <button class="seg" type="button" data-step-tab={i} style={tabStyle}>
+          {t}
+        </button>
+      ))}
+    </div>
+    <button
+      class="btn"
+      type="button"
+      data-step-toggle
+      style="display:inline-flex;align-items:center;height:36px;padding:0 14px;border:0;border-radius:var(--radius-pill);background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer"
+    >
+      Pause
+    </button>
+  </div>
+
+  <div class="term" aria-live="polite">
+    <div style="display:flex;gap:6px;margin-bottom:12px" aria-hidden="true">
+      <span style="width:10px;height:10px;border-radius:50%;background:var(--bar-2)"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:var(--bar-2)"></span>
+      <span style="width:10px;height:10px;border-radius:50%;background:var(--bar-2)"></span>
+    </div>
+    <div data-line="0" style="word-break:break-all">
+      <span class="dim">$</span> {site.installCommand}
+    </div>
+    <div data-line="1" class="ans dim">
+      Looking for Hermes Agent&hellip;
+    </div>
+    <div data-line="2" class="ans">
+      Not found. Installing it for you.
+      <div style="position:relative;margin-top:6px;height:6px;width:min(260px,100%);border-radius:var(--radius-pill);overflow:hidden;background:var(--bar-2)">
+        <div class="cv" data-install-bar style="background:var(--white);transform:scaleX(0.18)"></div>
+      </div>
+    </div>
+    <div data-line="3" class="ans">
+      <span class="tick">&#10003;</span> Hermes Agent installed
+    </div>
+    <div data-line="4" class="ans">
+      <span class="tick">&#10003;</span> Helmet added on top
+    </div>
+    <div data-line="5" class="ans" style="margin-top:8px">
+      Which AI models should Helmet use?
+    </div>
+    <div data-line="6" class="ans">
+      <span class="tick">&#10003;</span> Quick model connected
+      <br />
+      <span class="tick">&#10003;</span> Smart model connected
+    </div>
+    <div data-line="7" class="ans" style="margin-top:8px">
+      <span class="tick">&#10003;</span> All set. Tell Helmet what you want done.
+      <div style="margin-top:4px">
+        <span class="tick">&rsaquo;</span> Add a login page to my app.
+        <span
+          class="caret"
+          aria-hidden="true"
+          style="display:inline-block;width:2px;height:15px;margin-left:2px;vertical-align:-2px;background:var(--white)"
+        ></span>
+      </div>
+    </div>
+  </div>
+  <p data-step-caption style="margin:14px 0 0;max-width:460px;font-size:15px;line-height:1.4;color:var(--graphite)"></p>
+</div>

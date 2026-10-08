@@ -1,0 +1,62 @@
+---
+const line = "position:relative;width:1px;height:28px;background:var(--faint)";
+const dot = "position:absolute;left:-2px;top:0;width:5px;height:5px;border-radius:50%;background:var(--ink)";
+const workerDelays = ["0.9s", "1.1s", "1.3s"];
+---
+
+<section id="architecture" class="sec">
+  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:56px;align-items:center">
+    <div class="rv" style="flex:1 1 340px;min-width:0">
+      <h2 style="margin:0;font-size:clamp(32px,5vw,44px);line-height:1.13">Optimized agents, not just more of them.</h2>
+      <p style="margin:24px 0 0;font-size:20px;line-height:1.38;font-weight:300">
+        The orchestrator writes each prompt and keeps the plan. Workers get exactly the context they need. The
+        supervisor checks the outcome without touching a file.
+      </p>
+    </div>
+
+    <div class="rv rv2" style="flex:1.2 1 440px;min-width:0">
+      <div
+        role="img"
+        aria-label="Diagram: a supervisor watches an orchestrator, which hands tasks to three workers that share a folder"
+        style="padding:32px;border-radius:var(--radius-panel);border:1px solid var(--line-soft);background:var(--white);box-sizing:border-box;font-size:14px;font-weight:600"
+      >
+        <div style="display:flex;justify-content:center">
+          <div style="padding:12px 20px;border-radius:var(--radius-card);border:1px dashed var(--faint);background:var(--white)">
+            Supervisor, read-only
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center">
+          <div class="ln" style={line}>
+            <span class="dot" style={dot}></span>
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center">
+          <div style="padding:12px 24px;border-radius:var(--radius-card);background:var(--ink);color:var(--white)">
+            Orchestrator
+          </div>
+        </div>
+        <div style="display:flex;justify-content:center">
+          <div class="ln" style={line}>
+            <span class="dot" style={`${dot};animation-delay:.6s`}></span>
+          </div>
+        </div>
+        <div class="ln-h" style="margin:0 16.6%;height:1px;background:var(--faint)"></div>
+        <div style="display:flex;gap:12px">
+          {workerDelays.map((delay) => (
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center">
+              <div class="ln" style={line}>
+                <span class="dot" style={`${dot};animation-delay:${delay}`}></span>
+              </div>
+              <div style="width:100%;box-sizing:border-box;text-align:center;padding:12px 8px;border-radius:var(--radius-card);background:var(--surface)">
+                Worker
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style="margin-top:20px;padding:14px 16px;border-radius:var(--radius-card);border:1px solid var(--line);text-align:center;color:var(--muted);font-weight:450">
+          Shared folder. Briefs and results exchanged as files.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
