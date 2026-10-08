@@ -1,5 +1,8 @@
 ---
 import { providers } from "../data/providers";
+
+// Each half of the track must be wider than the viewport, or the -50% loop reveals a gap on the right.
+const runs = [false, true, true, true, true, true, true, true];
 ---
 
 <section aria-label="Subscriptions Helmet works with" class="rv" style="margin-top:56px;overflow:hidden">
@@ -11,12 +14,18 @@ import { providers } from "../data/providers";
       class="marquee marquee-slow"
       style="display:flex;align-items:center;width:max-content;gap:72px;padding-right:72px"
     >
-      {providers.map((p) => (
-        <span class="lg" role="img" aria-label={p.name} style="display:block;flex:none" set:html={p.svg} />
-      ))}
-      {providers.map((p) => (
-        <span class="lg" aria-hidden="true" style="display:block;flex:none" set:html={p.svg} />
-      ))}
+      {runs.map((hidden) =>
+        providers.map((p) => (
+          <span
+            class="lg"
+            role={hidden ? undefined : "img"}
+            aria-label={hidden ? undefined : p.name}
+            aria-hidden={hidden ? "true" : undefined}
+            style="display:block;flex:none"
+            set:html={p.svg}
+          />
+        )),
+      )}
     </div>
   </div>
   <p style="margin:20px 0 0;text-align:center;font-size:12px;line-height:1.33;color:var(--faint);padding:0 24px">
