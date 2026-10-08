@@ -45,6 +45,9 @@
 .copy .copy-done {
   display: none;
 }
+.copy .copy-idle {
+  display: inline-flex;
+}
 .copy[data-copied="true"] .copy-idle {
   display: none;
 }
