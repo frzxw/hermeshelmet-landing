@@ -1,148 +1,72 @@
 ---
-/* What's inside: one visual per idea, a few words each. */
-const routes = ["Plan first", "One worker", "Parallel"];
-const ring = [
-  { n: 1, v: 10 },
-  { n: 2, v: 12 },
-  { n: 3, v: 16 },
-  { n: 4, v: 14 },
+// Same task, two ways. Token counts are one illustrative run on a 64k scale.
+const SCALE = 64;
+const spawned = ["Agent 1", "Agent 2", "Agent 3", "Agent 4", "Agent 5"].map((name) => ({ name, k: 62 }));
+const ours = [
+  { name: "Orchestrator", k: 38, tone: "ink", note: "plan.md" },
+  { name: "Worker 1", k: 9, tone: "sky", note: "brief-worker-1.md" },
+  { name: "Worker 2", k: 11, tone: "dusk", note: "brief-worker-2.md" },
+  { name: "Worker 3", k: 6, tone: "clay", note: "brief-worker-3.md" },
+  { name: "Supervisor", k: 14, tone: "read", note: "diff, read-only" },
 ];
-let acc = 0;
-const C = 2 * Math.PI * 52;
-const files = ["plan.md", "brief-worker-1.md", "result-worker-1.md"];
-const gates = [
-  { name: "Spec", done: true },
-  { name: "Architecture", done: true },
-  { name: "Ship", done: false },
-];
+const total = (rows: { k: number }[]) => rows.reduce((a, r) => a + r.k, 0);
 ---
 
 <section id="features" class="sec">
   <div class="wrap">
-    <div class="sec-head center">
-      <p class="rv kicker">What’s inside</p>
-      <h2 class="rv h2 big" style="margin-top:16px">
-        Orchestrated,
-        <br />
-        not just spawned.
-      </h2>
+    <div class="arch-head">
+      <div>
+        <p class="rv kicker">Same task, two ways</p>
+        <h2 class="rv h2 big" style="margin-top:16px">
+          Orchestrated,
+          <br />
+          not just spawned.
+        </h2>
+      </div>
+      <p class="rv lead">
+        Spawning copies the whole conversation into every agent. Helmet’s orchestrator writes each one a short brief
+        instead, so the context stays small and the cache stays warm.
+      </p>
     </div>
 
-    <div class="bento">
-      <!-- Routing -->
-      <article class="tcard rv span-4">
-        <div class="viz viz-aurora">
-          <div class="route">
-            <div class="route-ask">
-              Add rate limiting to the API.<span class="caret" aria-hidden="true"></span>
-            </div>
-            <svg class="route-lines" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
-              <path d="M150 0 C150 30 50 30 50 60" />
-              <path d="M150 0 L150 60" />
-              <path d="M150 0 C150 30 250 30 250 60" />
-            </svg>
-            <div class="route-opts">
-              {routes.map((r, i) => (
-                <span class:list={["ropt", `ro${i}`]}>{r}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div class="cap">
-          <h3>Automatic routing</h3>
-          <p>Say what you need. Helmet decides who does it.</p>
-        </div>
-      </article>
-
-      <!-- Context -->
-      <article class="tcard rv rv2 span-2">
-        <div class="viz viz-plain">
-          <svg class="donut" viewBox="0 0 120 120" aria-hidden="true">
-            <circle cx="60" cy="60" r="52" class="donut-bg" />
-            {ring.map((s) => {
-              const len = (s.v / 100) * C;
-              const el = (
-                <circle
-                  cx="60"
-                  cy="60"
-                  r="52"
-                  class="donut-seg"
-                  style={`stroke:var(--bar-${s.n});stroke-dasharray:${len - 2} ${C};stroke-dashoffset:${-acc}`}
-                />
-              );
-              acc += len;
-              return el;
-            })}
-          </svg>
-          <div class="donut-label">
-            <b>52%</b>
-            <span>of 200k</span>
-          </div>
-        </div>
-        <div class="cap">
-          <h3>See your context</h3>
-          <p>Every token in the window, itemized.</p>
-        </div>
-      </article>
-
-      <!-- Team -->
-      <article class="tcard rv span-2">
-        <div class="viz viz-dusk">
-          <div class="team">
-            <span class="av av-s" title="Supervisor">
-              S
+    <div class="vs">
+      <figure class="vs-col rv" style="margin:0">
+        <figcaption class="vs-top">
+          <span class="kicker">Spawned</span>
+          <span class="vs-total">
+            {total(spawned)}k<small>tokens</small>
+          </span>
+        </figcaption>
+        {spawned.map((r) => (
+          <div class="vs-row">
+            <span class="vs-name">{r.name}</span>
+            <span class="vs-track">
+              <span class="vs-fill full" style={`width:${(r.k / SCALE) * 100}%`}>
+                Full history
+              </span>
             </span>
-            <span class="av av-o" title="Orchestrator">
-              O
+          </div>
+        ))}
+      </figure>
+
+      <figure class="vs-col is-ours rv rv2" style="margin:0">
+        <figcaption class="vs-top">
+          <span class="kicker">Helmet</span>
+          <span class="vs-total">
+            {total(ours)}k<small>tokens</small>
+          </span>
+        </figcaption>
+        {ours.map((r) => (
+          <div class="vs-row">
+            <span class="vs-name">{r.name}</span>
+            <span class="vs-track">
+              <span class={`vs-fill ${r.tone}`} style={`width:${(r.k / SCALE) * 100}%`} />
+              <span class="vs-note">{r.note}</span>
             </span>
-            <span class="av">W1</span>
-            <span class="av">W2</span>
-            <span class="av">W3</span>
           </div>
-        </div>
-        <div class="cap">
-          <h3>Manage, judge, verify</h3>
-          <p>One leads, one checks, the rest build.</p>
-        </div>
-      </article>
-
-      <!-- Files -->
-      <article class="tcard rv rv2 span-2">
-        <div class="viz viz-clay">
-          <div class="fan" aria-hidden="true">
-            {files.map((f, i) => (
-              <div class:list={["fcard", `f${i}`]}>
-                <b>{f}</b>
-                <i />
-                <i />
-                <i class="short" />
-              </div>
-            ))}
-          </div>
-        </div>
-        <div class="cap">
-          <h3>Context through files</h3>
-          <p>Nothing re-read. Caches stay warm.</p>
-        </div>
-      </article>
-
-      <!-- Gates -->
-      <article class="tcard rv rv3 span-2">
-        <div class="viz viz-sky">
-          <ul class="gates" aria-hidden="true">
-            {gates.map((g) => (
-              <li class:list={[g.done && "done"]}>
-                <span>{g.name}</span>
-                <i class="tog" />
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="cap">
-          <h3>You approve the big calls</h3>
-          <p>Spec, architecture and ship wait for you.</p>
-        </div>
-      </article>
+        ))}
+      </figure>
     </div>
+    <p class="vs-foot rv">Context per agent for one illustrative run of “Add rate limiting to the API.”</p>
   </div>
 </section>

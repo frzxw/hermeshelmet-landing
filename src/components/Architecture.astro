@@ -1,41 +1,128 @@
 ---
-const workers = ["Worker 1", "Worker 2", "Worker 3"];
+// One real-looking run, drawn as a trace: who works when, and how much context each one carries.
+type Seg = { from: number; to: number; label: string; short?: boolean };
+type Row = { name: string; role: string; ctx: string; kind: "lead" | "worker" | "read"; tint?: string; segs: Seg[] };
+
+const rows: Row[] = [
+  {
+    name: "Orchestrator",
+    role: "Plans, briefs, judges",
+    ctx: "38k",
+    kind: "lead",
+    segs: [
+      { from: 0, to: 13, label: "Plan" },
+      { from: 13, to: 22, label: "Briefs", short: true },
+      { from: 84, to: 100, label: "Judge" },
+    ],
+  },
+  {
+    name: "Worker 1",
+    role: "Builds",
+    ctx: "9k",
+    kind: "worker",
+    tint: "sky",
+    segs: [{ from: 22, to: 61, label: "Rate limiter" }],
+  },
+  {
+    name: "Worker 2",
+    role: "Builds",
+    ctx: "11k",
+    kind: "worker",
+    tint: "dusk",
+    segs: [{ from: 24, to: 72, label: "Integration tests" }],
+  },
+  {
+    name: "Worker 3",
+    role: "Builds",
+    ctx: "6k",
+    kind: "worker",
+    tint: "clay",
+    segs: [{ from: 26, to: 47, label: "API docs" }],
+  },
+  {
+    name: "Supervisor",
+    role: "Read-only",
+    ctx: "14k",
+    kind: "read",
+    segs: [{ from: 63, to: 86, label: "Review" }],
+  },
+];
+const ticks = ["0:00", "1:00", "2:00", "3:00", "4:00"];
 ---
 
 <section id="architecture" class="sec dark-sec">
   <div class="dark rv">
-    <div class="wrap arch">
-      <div>
-        <p class="kicker">Architecture</p>
-        <h2 class="h2 big" style="margin-top:16px">
-          Optimized agents,
-          <br />
-          not just more of them.
-        </h2>
-        <p class="lead" style="max-width:420px">
-          The orchestrator plans and writes every prompt. Workers get only what they need. The supervisor checks the
-          result without touching a file.
+    <div class="wrap">
+      <div class="arch-head">
+        <div>
+          <p class="kicker">Architecture</p>
+          <h2 class="h2 big" style="margin-top:16px">
+            Optimized agents,
+            <br />
+            not just more of them.
+          </h2>
+        </div>
+        <p class="lead">
+          One task, traced. The orchestrator plans and writes every brief, workers carry only their slice, and the
+          supervisor reads the result without touching a file.
         </p>
       </div>
 
-      <div
-        class="orbit"
-        role="img"
-        aria-label="An orchestrator at the center, three workers circling it, and a read-only supervisor watching from outside"
+      <figure
+        class="trace"
+        aria-label="A four-minute run: the orchestrator plans and briefs, three workers build in parallel with small contexts, a read-only supervisor reviews, and the orchestrator judges the result"
       >
-        <div class="ring ring-outer"></div>
-        <div class="ring ring-inner"></div>
-        <div class="glowball" aria-hidden="true"></div>
-        <span class="node node-sup">Supervisor</span>
-        <span class="node node-core">Orchestrator</span>
-        <div class="spin" aria-hidden="true">
-          {workers.map((w, i) => (
-            <span class={`sat sat-${i}`}>
-              <span class="unspin">{w}</span>
-            </span>
+        <figcaption class="trace-bar">
+          <span class="trace-task">“Add rate limiting to the API.”</span>
+          <span class="trace-meta">5 agents · 4m 02s</span>
+        </figcaption>
+
+        <div class="trace-grid">
+          <div class="trace-axis" aria-hidden="true">
+            <span></span>
+            <div class="trace-ticks">
+              {ticks.map((t) => (
+                <span>{t}</span>
+              ))}
+            </div>
+            <span class="trace-ctxh">Context</span>
+          </div>
+
+          {rows.map((r) => (
+            <div class={`trace-row is-${r.kind}`}>
+              <div class="trace-who">
+                <span class="trace-name">{r.name}</span>
+                <span class="trace-role">{r.role}</span>
+              </div>
+              <div class="trace-track">
+                {r.segs.map((s) => (
+                  <span
+                    class:list={["seg", r.tint && `seg-${r.tint}`, s.short && "seg-short"]}
+                    style={`left:${s.from}%;width:${s.to - s.from}%`}
+                  >
+                    <span class="seg-l">{s.label}</span>
+                  </span>
+                ))}
+              </div>
+              <span class="trace-ctx">{r.ctx}</span>
+            </div>
           ))}
+
+          <span class="playhead" aria-hidden="true"></span>
         </div>
-      </div>
+
+        <div class="trace-legend" aria-hidden="true">
+          <span>
+            <i class="lg lg-lead"></i>Plans and judges
+          </span>
+          <span>
+            <i class="lg lg-work"></i>Writes code
+          </span>
+          <span>
+            <i class="lg lg-read"></i>Reads only
+          </span>
+        </div>
+      </figure>
     </div>
   </div>
 </section>

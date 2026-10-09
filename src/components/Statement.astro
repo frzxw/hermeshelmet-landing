@@ -1,5 +1,6 @@
 ---
 import wing from "../assets/hermes-agent-wing.svg";
+import wordmark from "../assets/hermes-agent-wordmark.svg?raw";
 
 // Each word lights up from gray to ink as it scrolls into view.
 const first = "Hermes remembers everything.".split(" ");
@@ -21,7 +22,10 @@ const pillars = [
           </div>
         </div>
       </div>
-      <figcaption class="kicker">Built on Hermes Agent</figcaption>
+      <figcaption class="built-on">
+        <span class="kicker">Built on</span>
+        <span class="wordmark" role="img" aria-label="Hermes-Agent" set:html={wordmark} />
+      </figcaption>
     </figure>
 
     <h2 class="h2 mega" aria-label="Hermes remembers everything. It just wasn’t ready to work.">
