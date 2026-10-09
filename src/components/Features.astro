@@ -1,52 +1,151 @@
 ---
-// The squeeze: as you scroll, five full-history contexts shrink to five briefs.
-// Token counts are one illustrative run, drawn on a 64k scale.
-const SCALE = 64;
-const rows = [
-  { name: "Orchestrator", k: 38, tone: "o", note: "plan.md" },
-  { name: "Worker 1", k: 9, tone: "w", note: "brief-1.md" },
-  { name: "Worker 2", k: 11, tone: "w", note: "brief-2.md" },
-  { name: "Worker 3", k: 6, tone: "w", note: "brief-3.md" },
-  { name: "Supervisor", k: 14, tone: "s", note: "the diff" },
+/* What's inside: one visual per idea, a few words each. */
+const routes = ["Plan first", "One worker", "Parallel"];
+const ring = [
+  { n: 1, v: 10 },
+  { n: 2, v: 12 },
+  { n: 3, v: 16 },
+  { n: 4, v: 14 },
+];
+let acc = 0;
+const C = 2 * Math.PI * 52;
+const files = ["plan.md", "brief-worker-1.md", "result-worker-1.md"];
+const sessions = [
+  { task: "Auth refactor", day: "Mon" },
+  { task: "Flaky tests", day: "Tue" },
+  { task: "Rate limiting", day: "Today", now: true },
+];
+const gates = [
+  { name: "Spec", done: true },
+  { name: "Architecture", done: true },
+  { name: "Ship", done: false },
 ];
 ---
 
-<section id="features" class="squeeze" aria-labelledby="sq-title">
-  <div class="sq-stage">
-    <div class="wrap sq-grid">
-      <div class="sq-copy">
-        <h2 id="sq-title" class="h2 big">
-          Five agents.
-          <br />A quarter of the context.
-        </h2>
-        <div class="sq-swap" aria-hidden="true">
-          <p class="sq-a">Spawned, every agent rereads the whole history.</p>
-          <p class="sq-b">With Helmet, each one reads only its brief.</p>
-        </div>
-        <p class="sr-only">
-          Spawning five agents copies the full history into each, about 310k tokens. Helmet gives each agent a brief,
-          about 78k tokens in total.
-        </p>
-        <p class="sq-count" aria-hidden="true">
-          <span class="sq-num"></span>
-          <small>k tokens</small>
-        </p>
-      </div>
+<section id="features" class="sec">
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="rv kicker">What’s inside</p>
+      <h2 class="rv h2 big" style="margin-top:16px">
+        Orchestrated,
+        <br />
+        not just spawned.
+      </h2>
+    </div>
 
-      <ul class="sq-bars" aria-hidden="true">
-        {rows.map((r) => (
-          <li style={`--w:${(r.k / SCALE) * 100}%`}>
-            <span class="sq-name">{r.name}</span>
-            <span class="sq-track">
-              <span class={`sq-fill t-${r.tone}`} />
-              <span class="sq-note">
-                <span class="n-a">full history</span>
-                <span class="n-b">{r.note}</span>
-              </span>
-            </span>
-          </li>
-        ))}
-      </ul>
+    <div class="bento">
+      <!-- Routing -->
+      <article class="tcard rv span-4">
+        <div class="viz viz-aurora">
+          <div class="route">
+            <div class="route-ask">
+              Add rate limiting to the API.<span class="caret" aria-hidden="true"></span>
+            </div>
+            <svg class="route-lines" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M150 0 C150 30 50 30 50 60" />
+              <path d="M150 0 L150 60" />
+              <path d="M150 0 C150 30 250 30 250 60" />
+            </svg>
+            <div class="route-opts">
+              {routes.map((r, i) => (
+                <span class:list={["ropt", `ro${i}`]}>{r}</span>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div class="cap">
+          <h3>Automatic routing</h3>
+          <p>Say what you need. Helmet decides who does it.</p>
+        </div>
+      </article>
+
+      <!-- Context -->
+      <article class="tcard rv rv2 span-2">
+        <div class="viz viz-plain">
+          <svg class="donut" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="52" class="donut-bg" />
+            {ring.map((s) => {
+              const len = (s.v / 100) * C;
+              const el = (
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="52"
+                  class="donut-seg"
+                  style={`stroke:var(--bar-${s.n});stroke-dasharray:${len - 2} ${C};stroke-dashoffset:${-acc}`}
+                />
+              );
+              acc += len;
+              return el;
+            })}
+          </svg>
+          <div class="donut-label">
+            <b>52%</b>
+            <span>of 200k</span>
+          </div>
+        </div>
+        <div class="cap">
+          <h3>See your context</h3>
+          <p>Every token in the window, itemized.</p>
+        </div>
+      </article>
+
+      <!-- Memory -->
+      <article class="tcard rv span-2">
+        <div class="viz viz-dusk">
+          <ol class="mem" aria-hidden="true">
+            {sessions.map((x) => (
+              <li class:list={[x.now && "now"]}>
+                <i />
+                {x.task}
+                <span>{x.day}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div class="cap">
+          <h3>Picks up where you left off</h3>
+          <p>Hermes memory carries every session forward.</p>
+        </div>
+      </article>
+
+      <!-- Files -->
+      <article class="tcard rv rv2 span-2">
+        <div class="viz viz-clay">
+          <div class="fan" aria-hidden="true">
+            {files.map((f, i) => (
+              <div class:list={["fcard", `f${i}`]}>
+                <b>{f}</b>
+                <i />
+                <i />
+                <i class="short" />
+              </div>
+            ))}
+          </div>
+        </div>
+        <div class="cap">
+          <h3>Context through files</h3>
+          <p>Nothing re-read. Caches stay warm.</p>
+        </div>
+      </article>
+
+      <!-- Gates -->
+      <article class="tcard rv rv3 span-2">
+        <div class="viz viz-sky">
+          <ul class="gates" aria-hidden="true">
+            {gates.map((g) => (
+              <li class:list={[g.done && "done"]}>
+                <span>{g.name}</span>
+                <i class="tog" />
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="cap">
+          <h3>You approve the big calls</h3>
+          <p>Spec, architecture and ship wait for you.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>

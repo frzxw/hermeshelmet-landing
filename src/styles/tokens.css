@@ -23,8 +23,12 @@
   --lav-soft: #e6e0ef;
   --sky-ink: #86ade6;
   --lav-ink: #a596c4;
-  --drift: linear-gradient(180deg, #dcebff 0, #e2eafc 22%, #e6e6f7 50%, #e1dbee 75%, #d3cae0 100%);
-  --aurora: linear-gradient(160deg, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0.38));
+  --p1: #dcebff;
+  --p2: #e1e7fc;
+  --p3: #e5e2f7;
+  --p4: #ddd6ee;
+  --p5: #d2c9e2;
+  --aurora: linear-gradient(160deg, var(--p1), var(--p5));
   --sun: #141414; /* the one accent is ink */
   --nous: #0000f2; /* Hermes Agent blue, only inside its logo */
   --night: #121212;
@@ -64,11 +68,6 @@
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 
-@property --sq {
-  syntax: "<integer>";
-  initial-value: 78;
-  inherits: false;
-}
 @property --num {
   syntax: "<integer>";
   initial-value: 83;
