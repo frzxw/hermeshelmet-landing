@@ -38,34 +38,23 @@ export const faqs = [
   },
   {
     q: "Which models does it work with?",
-    a: "Whichever you plug in. Helmet routes between them automatically, so you don’t pick tiers or write routing rules.",
+    a: "Whatever you have: a frontier subscription, a few API keys, or only free and local models. With free or local models, Helmet Lite keeps to smaller steps and tells you plainly what an upgrade would add.",
   },
   {
     q: "Do I need to learn commands?",
-    a: "No. Describe the work in plain language. Helmet reads the situation and decides what happens next.",
+    a: "No. Describe the work in plain language and Helmet decides how much process it deserves. The only command, /helmet, is for checking status, cost and context.",
   },
   {
     q: "How does it save tokens?",
-    a: "Agents exchange context through a shared folder instead of re-reading everything, and prompts stay stable so provider caches keep hitting.",
+    a: "Skills are short cards, checks run as scripts, each job goes to the cheapest model that can do it, and models only change between cards so provider caches keep hitting.",
+  },
+  {
+    q: "Is my API key safe?",
+    a: "Helmet never asks for or stores API keys. Sign-in goes through Hermes itself, and every config change is shown as a diff for your approval.",
   },
   {
     q: "Is it free?",
     // TODO: replace the placeholder with the license and repository link.
     a: "Yes. Helmet is an independent open-source project. [LICENSE AND REPO LINK]",
   },
-] as const;
-
-export const stats = [
-  { value: "cnt", label: "of input tokens served from cache in our own multi-agent runs.", aria: "About 83 percent" },
-  { value: "1", label: "command to install, even if you don’t have Hermes yet." },
-  { value: "0", label: "slash commands or keywords to learn before it works." },
-] as const;
-
-export const verbs = [
-  { label: "Plan", glyph: "plan" },
-  { label: "Route", glyph: "route" },
-  { label: "Build", glyph: "code" },
-  { label: "Test", glyph: "test" },
-  { label: "Review", glyph: "review" },
-  { label: "Verify", glyph: "verify" },
 ] as const;

@@ -63,23 +63,6 @@
     transform: none;
   }
 }
-@keyframes hh-flow {
-  0% {
-    opacity: 0;
-    transform: translateY(0);
-  }
-  15% {
-    opacity: 1;
-  }
-  85% {
-    opacity: 1;
-    transform: translateY(26px);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(26px);
-  }
-}
 @keyframes hh-rv {
   from {
     opacity: 0;
@@ -104,20 +87,6 @@
   }
   to {
     transform: scaleX(1);
-  }
-}
-@keyframes hh-pop {
-  0% {
-    opacity: 0;
-    transform: scale(0.5) rotate(-14deg);
-  }
-  60% {
-    opacity: 1;
-    transform: scale(1.12) rotate(3deg);
-  }
-  100% {
-    opacity: 1;
-    transform: none;
   }
 }
 @keyframes hh-out {
@@ -260,27 +229,6 @@
   .float2 {
     animation: hh-float 7s ease-in-out -2s infinite;
   }
-  .dot {
-    animation: hh-flow 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-  }
-
-  /* Icon hover: the stroke redraws */
-  .tile:hover .tg > *,
-  .mt:hover .tg > *,
-  .card:hover .tile .tg > * {
-    stroke-dasharray: 1 1;
-    animation: hh-draw 0.85s cubic-bezier(0.65, 0, 0.35, 1) both;
-  }
-  .tile:hover .tg > *:nth-child(2),
-  .mt:hover .tg > *:nth-child(2),
-  .card:hover .tile .tg > *:nth-child(2) {
-    animation-delay: 0.12s;
-  }
-  .tile:hover .tg > *:nth-child(3),
-  .mt:hover .tg > *:nth-child(3),
-  .card:hover .tile .tg > *:nth-child(3) {
-    animation-delay: 0.24s;
-  }
 
   /* Scroll-driven effects (progressive enhancement) */
   @supports (animation-timeline: view()) {
@@ -321,11 +269,6 @@
       animation: hh-count linear both;
       animation-timeline: view();
       animation-range: entry 10% cover 40%;
-    }
-    .tile .pop {
-      animation: hh-pop linear both;
-      animation-timeline: view();
-      animation-range: entry 5% entry 75%;
     }
     .hero-out {
       animation: hh-out linear both;

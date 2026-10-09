@@ -1,91 +1,51 @@
 ---
 import InstallStepper from "./InstallStepper.astro";
-import Tile from "./Tile.astro";
 
-const chip =
-  "display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:var(--radius-pill);font-size:13px;font-weight:600";
-const modelRows = [
-  { name: "Your fastest model", status: "Connected", strong: false },
-  { name: "Your strongest model", status: "Connected", strong: false },
-  { name: "Your local model", status: "Auto-routed", strong: true },
+const steps = [
+  {
+    title: "Run the installer.",
+    body: "No Hermes yet? It sets that up first, then adds Helmet on top. Every config change is shown as a diff before it’s applied.",
+  },
+  {
+    title: "Tell it what you have.",
+    body: "A frontier subscription, a few API keys, or only free and local models. Helmet tests each one and routes work between them.",
+  },
+  {
+    title: "Describe the work.",
+    body: "Talk to Hermes as usual. No trigger words, categories or model names to learn. Say “skip” whenever you want less process.",
+  },
 ];
 ---
 
 <section id="how" class="sec">
-  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
-    <div class="rv stick" style="flex:1 1 300px;min-width:0;position:sticky;top:120px">
-      <p class="eyebrow kicker">How it works</p>
-      <h2 class="h2" style="margin-top:16px">
-        No jargon, no slash commands, no setup maze.
+  <div class="wrap">
+    <div class="sec-head">
+      <p class="rv eyebrow kicker">Get started</p>
+      <h2 class="rv h2" style="margin-top:16px">
+        From zero to a working team in one command.
       </h2>
-      <p class="lead">Three steps from nothing to a Hermes that works like a team.</p>
     </div>
-
-    <div style="flex:1.4 1 460px;min-width:0;display:flex;flex-direction:column;gap:var(--gap)">
-      <!-- 1 -->
-      <div class="rv panel step glow">
-        <Tile numeral={1} bg="white" />
-        <div style="flex:1;min-width:0">
-          <h3 class="title" style="margin-top:10px;font-size:20px;line-height:26px">
-            Install with one command.
-          </h3>
-          <p class="body-m" style="max-width:460px">
-            No Hermes yet? Helmet sets that up too. Hermes itself, including its default UI, becomes the supercharged
-            version.
-          </p>
-          <InstallStepper />
-        </div>
-      </div>
-
-      <!-- 2 -->
-      <div class="rv panel step glow">
-        <Tile numeral={2} bg="white" />
-        <div style="flex:1;min-width:0">
-          <h3 class="title" style="margin-top:10px;font-size:20px;line-height:26px">
-            Plug in your models.
-          </h3>
-          <p class="body-m" style="max-width:460px">
-            Add whichever models you already have. Helmet routes between them for you. No tiers or categories to learn.
-          </p>
-          <div style="margin-top:24px;padding:4px 20px;border-radius:var(--radius-card);background:var(--white)">
-            {modelRows.map((r, i) => (
-              <div
-                style={`display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;font-size:15px;${i ? "border-top:1px solid var(--line-soft)" : ""}`}
-              >
-                <span style="font-weight:600">{r.name}</span>
-                <span style={r.strong ? "font-weight:600" : "color:var(--muted)"}>{r.status}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <!-- 3 -->
-      <div class="rv panel step glow">
-        <Tile numeral={3} bg="white" />
-        <div style="flex:1;min-width:0">
-          <h3 class="title" style="margin-top:10px;font-size:20px;line-height:26px">
-            Describe the work.
-          </h3>
-          <p class="body-m" style="max-width:460px">
-            Helmet reads the situation. No plan yet? It plans first. Then each piece goes to the right agent.
-          </p>
-          <div style="margin-top:24px">
-            <div style="display:flex;align-items:center;padding:14px 18px;border-radius:var(--radius-card);background:var(--white);font-size:15px">
-              Add rate limiting to the API.
-              <span
-                class="caret"
-                aria-hidden="true"
-                style="display:inline-block;width:2px;height:18px;margin-left:2px;background:var(--ink)"
-              ></span>
+    <div class="how">
+      <ol class="how-steps">
+        {steps.map((s, i) => (
+          <li class:list={["rv", i === 1 && "rv2", i === 2 && "rv3"]}>
+            <span class="how-n" aria-hidden="true">
+              {i + 1}
+            </span>
+            <div>
+              <h3 class="title" style="font-size:20px;line-height:26px">
+                {s.title}
+              </h3>
+              <p class="body-m">{s.body}</p>
             </div>
-            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
-              <span style={`${chip};background:var(--ink);color:var(--white)`}>Plan first</span>
-              <span style={`${chip};background:var(--fill)`}>3 workers</span>
-              <span style={`${chip};background:var(--fill)`}>Verify</span>
-            </div>
-          </div>
-        </div>
+          </li>
+        ))}
+        <li class="rv rv3 how-note">
+          Helmet never asks for or stores your API keys. Sign-in goes through Hermes itself.
+        </li>
+      </ol>
+      <div class="frame rv rv2 how-term">
+        <InstallStepper />
       </div>
     </div>
   </div>
