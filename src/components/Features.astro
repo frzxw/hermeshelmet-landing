@@ -1,72 +1,52 @@
 ---
-// Same task, two ways. Token counts are one illustrative run on a 64k scale.
+// The squeeze: as you scroll, five full-history contexts shrink to five briefs.
+// Token counts are one illustrative run, drawn on a 64k scale.
 const SCALE = 64;
-const spawned = ["Agent 1", "Agent 2", "Agent 3", "Agent 4", "Agent 5"].map((name) => ({ name, k: 62 }));
-const ours = [
-  { name: "Orchestrator", k: 38, tone: "ink", note: "plan.md" },
-  { name: "Worker 1", k: 9, tone: "sky", note: "brief-worker-1.md" },
-  { name: "Worker 2", k: 11, tone: "dusk", note: "brief-worker-2.md" },
-  { name: "Worker 3", k: 6, tone: "clay", note: "brief-worker-3.md" },
-  { name: "Supervisor", k: 14, tone: "read", note: "diff, read-only" },
+const rows = [
+  { name: "Orchestrator", k: 38, tone: "o", note: "plan.md" },
+  { name: "Worker 1", k: 9, tone: "w", note: "brief-1.md" },
+  { name: "Worker 2", k: 11, tone: "w", note: "brief-2.md" },
+  { name: "Worker 3", k: 6, tone: "w", note: "brief-3.md" },
+  { name: "Supervisor", k: 14, tone: "s", note: "the diff" },
 ];
-const total = (rows: { k: number }[]) => rows.reduce((a, r) => a + r.k, 0);
 ---
 
-<section id="features" class="sec">
-  <div class="wrap">
-    <div class="arch-head">
-      <div>
-        <p class="rv kicker">Same task, two ways</p>
-        <h2 class="rv h2 big" style="margin-top:16px">
-          Orchestrated,
-          <br />
-          not just spawned.
+<section id="features" class="squeeze" aria-labelledby="sq-title">
+  <div class="sq-stage">
+    <div class="wrap sq-grid">
+      <div class="sq-copy">
+        <h2 id="sq-title" class="h2 big">
+          Five agents.
+          <br />A quarter of the context.
         </h2>
+        <div class="sq-swap" aria-hidden="true">
+          <p class="sq-a">Spawned, every agent rereads the whole history.</p>
+          <p class="sq-b">With Helmet, each one reads only its brief.</p>
+        </div>
+        <p class="sr-only">
+          Spawning five agents copies the full history into each, about 310k tokens. Helmet gives each agent a brief,
+          about 78k tokens in total.
+        </p>
+        <p class="sq-count" aria-hidden="true">
+          <span class="sq-num"></span>
+          <small>k tokens</small>
+        </p>
       </div>
-      <p class="rv lead">
-        Spawning copies the whole conversation into every agent. Helmet’s orchestrator writes each one a short brief
-        instead, so the context stays small and the cache stays warm.
-      </p>
-    </div>
 
-    <div class="vs">
-      <figure class="vs-col rv" style="margin:0">
-        <figcaption class="vs-top">
-          <span class="kicker">Spawned</span>
-          <span class="vs-total">
-            {total(spawned)}k<small>tokens</small>
-          </span>
-        </figcaption>
-        {spawned.map((r) => (
-          <div class="vs-row">
-            <span class="vs-name">{r.name}</span>
-            <span class="vs-track">
-              <span class="vs-fill full" style={`width:${(r.k / SCALE) * 100}%`}>
-                Full history
+      <ul class="sq-bars" aria-hidden="true">
+        {rows.map((r) => (
+          <li style={`--w:${(r.k / SCALE) * 100}%`}>
+            <span class="sq-name">{r.name}</span>
+            <span class="sq-track">
+              <span class={`sq-fill t-${r.tone}`} />
+              <span class="sq-note">
+                <span class="n-a">full history</span>
+                <span class="n-b">{r.note}</span>
               </span>
             </span>
-          </div>
+          </li>
         ))}
-      </figure>
-
-      <figure class="vs-col is-ours rv rv2" style="margin:0">
-        <figcaption class="vs-top">
-          <span class="kicker">Helmet</span>
-          <span class="vs-total">
-            {total(ours)}k<small>tokens</small>
-          </span>
-        </figcaption>
-        {ours.map((r) => (
-          <div class="vs-row">
-            <span class="vs-name">{r.name}</span>
-            <span class="vs-track">
-              <span class={`vs-fill ${r.tone}`} style={`width:${(r.k / SCALE) * 100}%`} />
-              <span class="vs-note">{r.note}</span>
-            </span>
-          </div>
-        ))}
-      </figure>
+      </ul>
     </div>
-    <p class="vs-foot rv">Context per agent for one illustrative run of “Add rate limiting to the API.”</p>
   </div>
 </section>

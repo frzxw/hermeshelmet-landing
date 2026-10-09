@@ -260,15 +260,6 @@
   .float2 {
     animation: hh-float 7s ease-in-out -2s infinite;
   }
-  .seg,
-  .vs-fill {
-    animation: hh-seg linear both;
-    animation-timeline: view();
-    animation-range: entry 10% cover 40%;
-  }
-  .playhead {
-    animation: hh-play 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  }
   .dot {
     animation: hh-flow 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   }
@@ -364,29 +355,104 @@
   }
 }
 
-@keyframes hh-seg {
+/* The squeeze: pinned while five full contexts shrink to five briefs */
+@keyframes sq-num {
   from {
-    transform: scaleX(0);
+    --sq: 310;
+  }
+  to {
+    --sq: 78;
+  }
+}
+@keyframes sq-fill {
+  from {
+    width: 96%;
+  }
+}
+@keyframes sq-hatch {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes sq-show {
+  from {
     opacity: 0;
   }
   to {
-    transform: scaleX(1);
     opacity: 1;
   }
 }
-@keyframes hh-play {
-  0% {
-    opacity: 0;
-    left: calc(28px + var(--who));
-  }
-  8% {
-    opacity: 1;
-  }
-  88% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    left: calc(100% - 28px - var(--ctx));
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .squeeze {
+      height: 260vh;
+      view-timeline-name: --sq;
+    }
+    .sq-stage {
+      position: sticky;
+      top: 0;
+      display: flex;
+      align-items: center;
+      height: 100vh;
+      padding: 0;
+    }
+    @media (max-width: 760px) {
+      .sq-stage {
+        align-items: flex-start;
+        padding-top: 116px;
+        box-sizing: border-box;
+      }
+      .sq-grid {
+        gap: 28px;
+      }
+      .sq-count {
+        margin-top: 20px;
+        font-size: 64px;
+      }
+      .sq-bars li {
+        height: 50px;
+      }
+    }
+    .sq-stage > .wrap {
+      width: 100%;
+    }
+    .sq-num,
+    .sq-fill,
+    .sq-fill::before,
+    .sq-a,
+    .sq-b,
+    .n-a,
+    .n-b {
+      animation-timeline: --sq;
+      animation-range: contain 20% contain 75%;
+      animation-fill-mode: both;
+      animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+    }
+    .sq-num {
+      animation-name: sq-num;
+    }
+    .sq-fill {
+      animation-name: sq-fill;
+    }
+    .sq-fill::before,
+    .sq-a,
+    .n-a {
+      animation-name: sq-hatch;
+    }
+    .sq-b,
+    .n-b {
+      animation-name: sq-show;
+    }
+    .sq-a,
+    .n-a {
+      animation-range: contain 22% contain 38%;
+    }
+    .sq-b,
+    .n-b {
+      animation-range: contain 62% contain 76%;
+    }
   }
 }

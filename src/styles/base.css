@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  background: var(--white);
+  background: var(--drift);
   color: var(--ink);
   font-family: var(--font);
   font-weight: 450;
@@ -68,4 +68,12 @@ h3 {
   .sec {
     padding-top: 112px !important;
   }
+}
+
+/* Mid-page sections sit on the drifting sky-to-lavender page, so their neutrals turn glassy. */
+main > section:not(.hero) {
+  --surface: rgba(255, 255, 255, 0.55);
+  --fill: rgba(255, 255, 255, 0.75);
+  --line: rgba(40, 32, 72, 0.1);
+  --line-soft: rgba(40, 32, 72, 0.06);
 }
