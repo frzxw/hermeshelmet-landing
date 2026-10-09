@@ -1,76 +1,48 @@
 ---
-import { Image } from "astro:assets";
-import helmet from "../assets/helmet.webp";
-
-// The helmet, annotated: each part stands for one role in a run.
-// x/y place the pin on the helmet (percent of the image), len is the leader line.
-const parts = [
-  { n: 1, role: "Workers", count: "×3", line: "Build from a brief, in parallel.", x: 21, y: 27, side: "l", len: 132 },
-  {
-    n: 2,
-    role: "Orchestrator",
-    count: "×1",
-    line: "Plans the work, writes every brief.",
-    x: 64,
-    y: 34,
-    side: "r",
-    len: 196,
-  },
-  {
-    n: 3,
-    role: "Supervisor",
-    count: "×1",
-    line: "Reads the result. Never edits it.",
-    x: 80,
-    y: 77,
-    side: "r",
-    len: 132,
-  },
-];
+// The headline is the diagram: each role sits inside its own sentence.
+const workers = ["W1", "W2", "W3"];
 ---
 
-<section id="architecture" class="sec">
+<section id="architecture" class="sec roles">
   <div class="wrap">
-    <h2 class="rv h2 big roles-title">
-      One plans.
-      <br />
-      Three build.
-      <br />
-      One checks.
+    <h2 class="roles-type" aria-label="One plans. Three build. One checks.">
+      <span class="rl rv" aria-hidden="true">
+        One
+        <span class="chip chip-o">
+          <svg viewBox="0 0 100 100">
+            <path d="M50 6 C53 36 64 47 94 50 C64 53 53 64 50 94 C47 64 36 53 6 50 C36 47 47 36 50 6 Z" />
+          </svg>
+          Orchestrator
+        </span>
+        plans.
+      </span>
+      <span class="rl rv rv2" aria-hidden="true">
+        Three
+        <span class="chip chip-w">
+          <span class="avs">
+            {workers.map((w, i) => (
+              <b class={`av-${i}`}>{w}</b>
+            ))}
+          </span>
+          Workers
+        </span>
+        build.
+      </span>
+      <span class="rl rv rv3" aria-hidden="true">
+        One
+        <span class="chip chip-s">
+          <svg viewBox="0 0 100 100">
+            <path d="M6 50 C22 24 36 16 50 16 C64 16 78 24 94 50 C78 76 64 84 50 84 C36 84 22 76 6 50 Z" class="lid" />
+            <circle cx="50" cy="50" r="15" />
+          </svg>
+          Supervisor
+        </span>
+        checks.
+      </span>
     </h2>
-
-    <figure
-      class="anat rv"
-      aria-label="The Helmet: the wing is three workers, the crown is the orchestrator, the visor is the supervisor"
-    >
-      <div class="anat-helmet float">
-        <Image src={helmet} alt="" widths={[420, 840]} sizes="(max-width: 760px) 64vw, 420px" loading="eager" />
-        {parts.map((p) => (
-          <div class={`pin pin-${p.side}`} style={`left:${p.x}%;top:${p.y}%;--len:${p.len}px`}>
-            <span class="pin-dot">{p.n}</span>
-            <span class="pin-line" aria-hidden="true" />
-            <div class="pin-card">
-              <b>
-                {p.role} <span>{p.count}</span>
-              </b>
-              <p>{p.line}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-      <ol class="anat-list">
-        {parts.map((p) => (
-          <li>
-            <span class="pin-dot">{p.n}</span>
-            <div>
-              <b>
-                {p.role} <span>{p.count}</span>
-              </b>
-              <p>{p.line}</p>
-            </div>
-          </li>
-        ))}
-      </ol>
-    </figure>
+    <p class="roles-note rv">
+      The orchestrator writes each worker a short brief. Workers build in parallel. The supervisor reads the result and
+      never edits a file.
+    </p>
   </div>
 </section>

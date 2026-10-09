@@ -37,6 +37,12 @@
   --dk-line: #3d3c3a;
 
   /* Context-bar shades, darkest to lightest */
+  /* Context segments: sky blues, the footer's sunset for memory, then lavenders */
+  --ctx-1: #2f6fe0;
+  --ctx-2: #7aa7f3;
+  --ctx-3: #f0a07a;
+  --ctx-4: #9b8ce6;
+  --ctx-5: #d4ccf2;
   --bar-1: #141414;
   --bar-2: #57534e;
   --bar-3: #8a8580;
@@ -70,6 +76,6 @@
 
 @property --num {
   syntax: "<integer>";
-  initial-value: 83;
+  initial-value: 99;
   inherits: false;
 }

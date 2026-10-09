@@ -56,7 +56,7 @@ export const faqs = [
 ] as const;
 
 export const stats = [
-  { value: "cnt", label: "of input tokens served from cache in our own multi-agent runs.", aria: "About 83 percent" },
+  { value: "cnt", label: "of input tokens served from cache in our own multi-agent runs.", aria: "99 percent" },
   { value: "1", label: "command to install, even if you don’t have Hermes yet." },
   { value: "0", label: "slash commands or keywords to learn before it works." },
 ] as const;
