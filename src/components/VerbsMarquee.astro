@@ -1,0 +1,20 @@
+---
+import { verbs } from "../data/site";
+import Tile from "./Tile.astro";
+
+// Identical runs so the -50% translate loops seamlessly; each half must be wider than the viewport.
+const runs = [false, true, true, true, true, true, true, true];
+---
+
+<section aria-label="What Helmet does" class="marquee-wrap" style="margin-top:160px;overflow:hidden">
+  <div class="marquee marquee-rev" style="display:flex;width:max-content;gap:56px;padding-right:56px">
+    {runs.map((hidden) =>
+      verbs.map((v) => (
+        <div aria-hidden={hidden ? "true" : undefined} style="display:flex;align-items:center;gap:14px">
+          <Tile glyph={v.glyph} size={56} class="mt" />
+          <span class="mq-t">{v.label}</span>
+        </div>
+      )),
+    )}
+  </div>
+</section>

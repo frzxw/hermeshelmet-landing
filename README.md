@@ -21,9 +21,9 @@ npm run format     # prettier
 
 ```
 src/
-  assets/        Optimized images (clay hero, hands, helmet, closing scene), the Hermes Agent wing and provider logo SVGs
-  components/    One component per page section, plus RollButton, CopyButton
-  data/          Copy and links (site.ts), provider logos
+  assets/        Optimized images (clay hero, hands, helmet, closing scene) and provider logo SVGs
+  components/    One component per page section, plus Tile, RollButton, CopyButton
+  data/          Copy and links (site.ts), provider logos, icon glyphs
   layouts/       Base.astro: <head>, fonts, global styles
   pages/         index.astro composes the sections
   scripts/       Vanilla TS: console demo, install stepper, copy button, anchor scrolling
@@ -40,7 +40,7 @@ public/          Favicon and robots.txt
 
 ## Editing content
 
-- Copy that repeats (FAQ, links, install command) lives in `src/data/site.ts`.
+- Copy that repeats (FAQ, stats, links, install command) lives in `src/data/site.ts`.
 - The console demo script is `src/scripts/console.ts`; the install walkthrough is `src/scripts/stepper.ts`.
 - To add a provider logo, drop the SVG in `src/assets/logos/` and add it to `src/data/providers.ts`.
 
@@ -48,7 +48,7 @@ public/          Favicon and robots.txt
 
 - [ ] Replace the placeholder GitHub, contributing and license URLs in `src/data/site.ts`.
 - [ ] Replace `[LICENSE AND REPO LINK]` in the FAQ answer (same file).
-- [ ] Confirm or remove the "~83%" cache statistic (`src/components/Tokens.astro`; the count-up target is `--num` in `tokens.css` and `hh-count` in `motion.css`).
+- [ ] Confirm or remove the "~83%" cache statistic (`stats` in `src/data/site.ts`; the count-up target is `--num` in `tokens.css` and `hh-count` in `motion.css`).
 - [ ] Add a `LICENSE` file.
 - [ ] Add an Open Graph image and reference it in `src/layouts/Base.astro`.
 
