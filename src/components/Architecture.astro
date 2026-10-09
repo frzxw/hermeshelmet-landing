@@ -1,13 +1,35 @@
 ---
-// Three roles as a hand of cards, echoing the Hermes Agent badge.
-const cards = [
-  { n: "1", role: "Orchestrator", line: "Plans the work and writes every brief.", glyph: "star", tone: "sky" },
-  { n: "3", role: "Workers", line: "Build from a brief, in parallel.", glyph: "blocks", tone: "mid" },
-  { n: "1", role: "Supervisor", line: "Reads the result. Never edits it.", glyph: "eye", tone: "lav" },
+import { Image } from "astro:assets";
+import helmet from "../assets/helmet.webp";
+
+// The helmet, annotated: each part stands for one role in a run.
+// x/y place the pin on the helmet (percent of the image), len is the leader line.
+const parts = [
+  { n: 1, role: "Workers", count: "×3", line: "Build from a brief, in parallel.", x: 21, y: 27, side: "l", len: 132 },
+  {
+    n: 2,
+    role: "Orchestrator",
+    count: "×1",
+    line: "Plans the work, writes every brief.",
+    x: 64,
+    y: 34,
+    side: "r",
+    len: 196,
+  },
+  {
+    n: 3,
+    role: "Supervisor",
+    count: "×1",
+    line: "Reads the result. Never edits it.",
+    x: 80,
+    y: 77,
+    side: "r",
+    len: 132,
+  },
 ];
 ---
 
-<section id="architecture" class="sec roles">
+<section id="architecture" class="sec">
   <div class="wrap">
     <h2 class="rv h2 big roles-title">
       One plans.
@@ -17,42 +39,38 @@ const cards = [
       One checks.
     </h2>
 
-    <ol class="hand">
-      {cards.map((c, i) => (
-        <li class={`rcard rcard-${i}`}>
-          <div class="card-corner">
-            <b>{c.n}</b>
-            <span>{c.role}</span>
+    <figure
+      class="anat rv"
+      aria-label="The Helmet: the wing is three workers, the crown is the orchestrator, the visor is the supervisor"
+    >
+      <div class="anat-helmet float">
+        <Image src={helmet} alt="" widths={[420, 840]} sizes="(max-width: 760px) 64vw, 420px" loading="eager" />
+        {parts.map((p) => (
+          <div class={`pin pin-${p.side}`} style={`left:${p.x}%;top:${p.y}%;--len:${p.len}px`}>
+            <span class="pin-dot">{p.n}</span>
+            <span class="pin-line" aria-hidden="true" />
+            <div class="pin-card">
+              <b>
+                {p.role} <span>{p.count}</span>
+              </b>
+              <p>{p.line}</p>
+            </div>
           </div>
-          <div class={`card-art tone-${c.tone}`} aria-hidden="true">
-            {c.glyph === "star" && (
-              <svg viewBox="0 0 100 100">
-                <path d="M50 6 C53 36 64 47 94 50 C64 53 53 64 50 94 C47 64 36 53 6 50 C36 47 47 36 50 6 Z" />
-              </svg>
-            )}
-            {c.glyph === "blocks" && (
-              <svg viewBox="0 0 100 100">
-                <rect x="14" y="58" width="72" height="22" rx="6" />
-                <rect x="22" y="33" width="56" height="22" rx="6" opacity=".7" />
-                <rect x="30" y="8" width="40" height="22" rx="6" opacity=".45" />
-              </svg>
-            )}
-            {c.glyph === "eye" && (
-              <svg viewBox="0 0 100 100">
-                <path
-                  d="M6 50 C22 24 36 16 50 16 C64 16 78 24 94 50 C78 76 64 84 50 84 C36 84 22 76 6 50 Z"
-                  class="eye-lid"
-                />
-                <circle cx="50" cy="50" r="15" />
-              </svg>
-            )}
-          </div>
-          <p class="card-line">{c.line}</p>
-          <div class="card-corner flip" aria-hidden="true">
-            <b>{c.n}</b>
-          </div>
-        </li>
-      ))}
-    </ol>
+        ))}
+      </div>
+      <ol class="anat-list">
+        {parts.map((p) => (
+          <li>
+            <span class="pin-dot">{p.n}</span>
+            <div>
+              <b>
+                {p.role} <span>{p.count}</span>
+              </b>
+              <p>{p.line}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </figure>
   </div>
 </section>

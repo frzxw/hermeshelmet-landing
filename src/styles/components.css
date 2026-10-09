@@ -1110,100 +1110,101 @@
   background: var(--ink);
 }
 
-/* Roles: a hand of cards */
+/* Roles: the helmet, annotated */
 .roles-title {
   text-align: center;
 }
-.hand {
-  display: flex;
-  justify-content: center;
-  margin: 88px 0 0;
-  padding: 0;
-  list-style: none;
-}
-.rcard {
+.anat {
   position: relative;
   display: grid;
-  grid-template-rows: auto minmax(0, 1fr) auto auto;
-  width: 300px;
-  aspect-ratio: 5 / 7;
-  margin: 0 8px;
-  padding: 22px;
-  box-sizing: border-box;
-  border: 1.5px solid var(--ink);
-  border-radius: 22px;
-  background: var(--white);
-  box-shadow: 0 32px 56px -36px rgba(44, 34, 84, 0.45);
-  transition:
-    transform 0.5s var(--ease-out),
-    box-shadow 0.5s var(--ease-out);
+  place-items: center;
+  margin: 72px 0 0;
+  padding: 72px 24px;
+  border-radius: var(--radius-frame);
+  background: linear-gradient(160deg, var(--p3), var(--p4));
+  overflow: hidden;
 }
-.rcard-0 {
-  transform: rotate(-7deg) translateY(28px);
+.anat-helmet {
+  position: relative;
+  width: 420px;
+  max-width: 100%;
 }
-.rcard-1 {
-  z-index: 1;
+.anat-helmet img {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 40px 40px rgba(60, 46, 110, 0.22));
 }
-.rcard-2 {
-  transform: rotate(7deg) translateY(28px);
+.pin {
+  position: absolute;
+  width: 0;
+  height: 0;
 }
-.rcard:hover {
-  z-index: 2;
-  transform: rotate(0) translateY(-12px);
-}
-.card-corner {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-}
-.card-corner b {
-  font-size: 44px;
-  line-height: 1;
-  font-weight: 600;
-  letter-spacing: -0.04em;
-}
-.card-corner span {
-  font-size: 15px;
-  font-weight: 600;
-}
-.card-corner.flip {
-  justify-self: end;
-  rotate: 180deg;
-  margin-top: 8px;
-}
-.card-corner.flip b {
-  font-size: 22px;
-}
-.card-art {
+.pin-dot {
+  position: absolute;
   display: grid;
   place-items: center;
-  margin-top: 18px;
-  border-radius: 14px;
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: var(--ink);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 650;
+  box-shadow: 0 0 0 5px rgba(255, 255, 255, 0.75);
 }
-.tone-sky {
-  background: var(--p3);
+.pin-line {
+  position: absolute;
+  top: 0;
+  height: 1px;
+  background: var(--ink);
+  opacity: 0.35;
 }
-.tone-mid {
-  background: linear-gradient(160deg, var(--p3), var(--p4));
+.pin-r .pin-line {
+  left: 18px;
+  width: calc(var(--len) - 18px);
 }
-.tone-lav {
-  background: var(--p4);
+.pin-l .pin-line {
+  right: 18px;
+  width: calc(var(--len) - 18px);
 }
-.card-art svg {
-  width: 46%;
-  fill: var(--ink);
+.pin-card {
+  position: absolute;
+  top: 0;
+  width: 220px;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: 0 20px 40px -24px rgba(44, 34, 84, 0.45);
+  transform: translateY(-50%);
 }
-.card-art .eye-lid {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 6;
+.pin-r .pin-card {
+  left: var(--len);
 }
-.card-line {
-  margin: 16px 0 0;
-  font-size: 17px;
-  line-height: 24px;
+.pin-l .pin-card {
+  right: var(--len);
+}
+.pin-card b,
+.anat-list b {
+  font-size: 15px;
+  font-weight: 650;
+}
+.pin-card b span,
+.anat-list b span {
+  margin-left: 4px;
   font-weight: 500;
-  color: var(--graphite);
+  color: var(--muted);
+}
+.pin-card p,
+.anat-list p {
+  margin: 4px 0 0;
+  font-size: 14px;
+  line-height: 20px;
+  color: var(--muted-strong);
+}
+.anat-list {
+  display: none;
 }
 
 /* Install */
@@ -1287,24 +1288,43 @@
   .viz {
     height: 220px;
   }
-  .hand {
-    justify-content: flex-start;
-    gap: 12px;
-    margin: 56px calc(-1 * var(--gutter)) -40px;
-    padding: 8px var(--gutter) 80px;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
+  .anat {
+    margin-top: 48px;
+    padding: 40px 20px 24px;
+    border-radius: var(--radius-panel);
   }
-  .rcard {
+  .anat-helmet {
+    width: 64vw;
+  }
+  .pin-line,
+  .pin-card {
+    display: none;
+  }
+  .pin-dot {
+    width: 22px;
+    height: 22px;
+    margin: -11px 0 0 -11px;
+    font-size: 11px;
+  }
+  .anat-list {
+    display: grid;
+    gap: 8px;
+    width: 100%;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+  .anat-list li {
+    display: flex;
+    gap: 14px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    background: var(--white);
+  }
+  .anat-list .pin-dot {
+    position: static;
     flex: none;
-    width: 74vw;
     margin: 0;
-    scroll-snap-align: center;
-  }
-  .rcard-0,
-  .rcard-2 {
-    transform: none;
   }
   .pillars li {
     padding: 14px 20px;
