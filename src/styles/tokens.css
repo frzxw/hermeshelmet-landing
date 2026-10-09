@@ -1,37 +1,37 @@
-/* Design tokens. Monochrome, neutral grays (Mobbin-style). */
+/* Design tokens. Semi-monochrome: warm stone grays around one ink. */
 :root {
   --white: #ffffff;
   --ink: #141414;
-  --graphite: #262626;
-  --muted-strong: #525252;
-  --muted: #707070;
-  --faint: #a3a3a3;
-  --surface: #f4f4f4; /* rgba(64,64,64,.06) on white */
-  --fill: #ebebeb; /* rgba(64,64,64,.08) on white: secondary buttons */
-  --line: #e5e5e5;
-  --line-soft: #ededed;
+  --graphite: #292524;
+  --muted-strong: #57534e;
+  --muted: #73706b;
+  --faint: #a8a29e;
+  --surface: #f5f5f4;
+  --fill: #ebeae8; /* secondary buttons */
+  --line: #e7e5e4;
+  --line-soft: #efeeec;
   --terminal: #0f0f0f;
 
-  /* Tints pulled from the clay art: hero sky, helmet clay, footer dusk, and the sun */
-  --sky: #dcebff;
-  --sky-deep: #9fc4f2;
-  --clay: #f4ebdd;
-  --clay-deep: #b89c7c;
-  --dusk: #e7e2ef;
-  --dusk-deep: #8f86a6;
-  --sun: #f0642c;
+  /* Panel shades. One quiet surface everywhere; the band steps a notch darker. */
+  --sky: #f5f5f4;
+  --sky-deep: #c9c5c0;
+  --clay: #f0efed;
+  --clay-deep: #c9c5c0;
+  --dusk: #f5f5f4;
+  --dusk-deep: #c9c5c0;
+  --sun: #141414; /* the one accent is ink */
   --nous: #0000f2; /* Hermes Agent blue, only inside its logo */
-  --night: #1c1a24; /* dark band, the footer scene after sunset */
-  --dk-2: #262331;
-  --dk-3: #312d3e;
-  --dk-line: #4a4559;
+  --night: #121212;
+  --dk-2: #1c1c1b;
+  --dk-3: #262625;
+  --dk-line: #3d3c3a;
 
   /* Context-bar shades, darkest to lightest */
   --bar-1: #141414;
-  --bar-2: #8f86a6;
-  --bar-3: #9fc4f2;
-  --bar-4: #d9bf9c;
-  --bar-5: #e3e0e8;
+  --bar-2: #57534e;
+  --bar-3: #8a8580;
+  --bar-4: #b5b0aa;
+  --bar-5: #dcd9d5;
 
   --radius-frame: 32px;
   --radius-panel: 24px;

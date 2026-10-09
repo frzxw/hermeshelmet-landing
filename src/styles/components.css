@@ -131,7 +131,7 @@
 .frame {
   padding: 40px;
   border-radius: var(--radius-frame);
-  background: linear-gradient(160deg, var(--sky) 0%, var(--dusk) 60%, var(--clay) 100%);
+  background: var(--surface);
   box-sizing: border-box;
 }
 /* On the tinted frame, controls go translucent white */
@@ -161,20 +161,13 @@
     margin-right: auto;
   }
 }
-/* Section label with a small sun dot */
+/* Section label */
 .kicker {
   display: inline-flex;
   align-items: center;
   gap: 8px;
   font-weight: 600;
   color: var(--ink);
-}
-.kicker::before {
-  content: "";
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--sun);
 }
 .dark .kicker {
   color: var(--white);
@@ -253,14 +246,14 @@
   position: absolute;
   inset: 8% 4% 0;
   border-radius: 50%;
-  background: radial-gradient(closest-side, var(--sky), transparent);
+  background: radial-gradient(closest-side, var(--line), transparent);
   z-index: -1;
 }
 .ln-sun {
-  background: var(--sun) !important;
+  background: var(--ink) !important;
 }
 
-/* Tinted panels, one per clay color */
+/* Panel shades, stepping one notch darker each */
 .t-sky {
   --tint: var(--sky);
   --tint-deep: var(--sky-deep);
@@ -274,7 +267,7 @@
   --tint-deep: var(--dusk-deep);
 }
 .panel[class*="t-"] {
-  background: var(--tint);
+  background: var(--surface);
 }
 .num {
   display: block;
@@ -309,7 +302,7 @@
   opacity: 1;
 }
 
-/* Dark band: the footer's sky after sunset */
+/* Dark band */
 .dark-sec {
   padding-left: 16px;
   padding-right: 16px;
@@ -319,16 +312,14 @@
   margin: 0 auto;
   padding: 120px 0;
   border-radius: var(--radius-frame);
-  background:
-    radial-gradient(60% 80% at 85% 0%, rgba(143, 134, 166, 0.35), transparent 70%),
-    radial-gradient(40% 60% at 10% 100%, rgba(240, 100, 44, 0.18), transparent 70%), var(--night);
+  background: radial-gradient(70% 90% at 85% -10%, rgba(255, 255, 255, 0.07), transparent 70%), var(--night);
   color: var(--white);
 }
 .dark .lead {
-  color: #b9b4c6;
+  color: #a8a5a0;
 }
 .dk-eyebrow {
-  color: #b9b4c6;
+  color: #a8a5a0;
 }
 .dk-panel {
   padding: 40px 32px;
@@ -343,10 +334,10 @@
   border-radius: var(--radius-card);
   background: var(--white);
   color: var(--ink);
-  box-shadow: 0 0 0 6px rgba(240, 100, 44, 0.18);
+  box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.1);
 }
 .dark .dot {
-  background: var(--sun) !important;
+  background: var(--white) !important;
 }
 
 /* Featured stat */
@@ -356,13 +347,17 @@
 }
 .stat-hero.glow::after,
 .dark .glow::after {
-  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(240, 100, 44, 0.16), transparent 70%);
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.06),
+    transparent 70%
+  );
 }
 .stat-hero p {
-  color: #d9d5e3;
+  color: #d6d3cf;
 }
 .stat-hero .sun {
-  color: var(--sun);
+  color: #6f6c68;
 }
 
 /* ---- Segmented controls ---- */
@@ -560,7 +555,7 @@
   transition: background 0.3s ease;
 }
 .faq-item[open] {
-  background: var(--sky);
+  background: var(--fill);
 }
 .faq-item summary {
   display: flex;
