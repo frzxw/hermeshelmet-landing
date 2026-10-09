@@ -1,25 +1,40 @@
 ---
 import { stats } from "../data/site";
+
+const [cache, ...rest] = stats;
+// 100 cells, one per percent of input tokens; the last one is the cache miss.
+const cells = Array.from({ length: 100 }, (_, i) => i < 99);
 ---
 
 <section class="sec" aria-label="Helmet in numbers">
-  <div class="numbers rv">
-    <div class="wrap nums">
-      {stats.map((s) => (
-        <div class="numcell">
-          {"aria" in s ? (
-            <div role="img" aria-label={s.aria} class="hugenum">
-              <span aria-hidden="true">
-                ~<span class="cnt"></span>
-                <span class="pct">%</span>
-              </span>
-            </div>
-          ) : (
-            <div class="hugenum">{s.value}</div>
-          )}
-          <p>{s.label}</p>
-        </div>
-      ))}
-    </div>
+  <div class="wrap metrics">
+    <article class="metric metric-hero rv">
+      <div role="img" aria-label={cache.aria} class="metric-num">
+        <span aria-hidden="true">
+          <span class="cnt"></span>
+          <span class="pct">%</span>
+        </span>
+      </div>
+      <p>{cache.label}</p>
+      <div class="cells" aria-hidden="true">
+        {cells.map((hit) => (
+          <i class:list={[!hit && "miss"]} />
+        ))}
+      </div>
+      <div class="cells-key" aria-hidden="true">
+        <span>
+          <i></i>From cache
+        </span>
+        <span>
+          <i class="miss"></i>Fresh
+        </span>
+      </div>
+    </article>
+    {rest.map((s, i) => (
+      <article class:list={["metric", "rv", i ? "rv3" : "rv2", `metric-${i}`]}>
+        <div class="metric-num">{s.value}</div>
+        <p>{s.label}</p>
+      </article>
+    ))}
   </div>
 </section>
