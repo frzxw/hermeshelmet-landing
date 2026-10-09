@@ -200,6 +200,23 @@
     transform: rotate(8deg) translateY(-30px) scale(1.04);
   }
 }
+@keyframes hh-orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes hh-route {
+  0%,
+  30% {
+    background: var(--ink);
+    color: var(--white);
+  }
+  34%,
+  100% {
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--muted-strong);
+  }
+}
 @keyframes hh-near-l {
   to {
     transform: translateX(56px);
@@ -259,6 +276,24 @@
   }
   .float2 {
     animation: hh-float 7s ease-in-out -2s infinite;
+  }
+  .spin {
+    animation: hh-orbit 40s linear infinite;
+  }
+  .spin .unspin {
+    animation: hh-orbit 40s linear infinite reverse;
+  }
+  .ropt {
+    animation: hh-route 6s linear infinite;
+  }
+  .ropt.ro1 {
+    animation-delay: 2s;
+  }
+  .ropt.ro2 {
+    animation-delay: 4s;
+  }
+  .ropt.ro0 {
+    animation-delay: 0s;
   }
   .dot {
     animation: hh-flow 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;

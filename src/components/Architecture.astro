@@ -1,63 +1,39 @@
 ---
-const line = "position:relative;width:1px;height:28px;background:var(--dk-line)";
-const dot = "position:absolute;left:-2px;top:0;width:5px;height:5px;border-radius:50%;background:var(--white)";
-const workerDelays = ["0.9s", "1.1s", "1.3s"];
+const workers = ["Worker 1", "Worker 2", "Worker 3"];
 ---
 
 <section id="architecture" class="sec dark-sec">
   <div class="dark rv">
-    <div class="wrap" style="display:flex;flex-wrap:wrap;gap:56px;align-items:center">
-      <div style="flex:1 1 340px;min-width:0">
-        <p class="eyebrow kicker">Architecture</p>
-        <h2 class="h2" style="margin-top:16px">
-          Optimized agents, not just more of them.
+    <div class="wrap arch">
+      <div>
+        <p class="kicker">Architecture</p>
+        <h2 class="h2 big" style="margin-top:16px">
+          Optimized agents,
+          <br />
+          not just more of them.
         </h2>
-        <p class="lead">
-          The orchestrator writes each prompt and keeps the plan. Workers get exactly the context they need. The
-          supervisor checks the outcome without touching a file.
+        <p class="lead" style="max-width:420px">
+          The orchestrator plans and writes every prompt. Workers get only what they need. The supervisor checks the
+          result without touching a file.
         </p>
       </div>
 
-      <div style="flex:1.2 1 440px;min-width:0">
-        <div
-          role="img"
-          aria-label="Diagram: a supervisor watches an orchestrator, which hands tasks to three workers that share a folder"
-          class="dk-panel"
-        >
-          <div style="display:flex;justify-content:center">
-            <div style="padding:12px 20px;border-radius:var(--radius-card);border:1px dashed var(--dk-line)">
-              Supervisor, read-only
-            </div>
-          </div>
-          <div style="display:flex;justify-content:center">
-            <div class="ln" style={line}>
-              <span class="dot" style={dot}></span>
-            </div>
-          </div>
-          <div style="display:flex;justify-content:center">
-            <div class="orch">Orchestrator</div>
-          </div>
-          <div style="display:flex;justify-content:center">
-            <div class="ln" style={line}>
-              <span class="dot" style={`${dot};animation-delay:.6s`}></span>
-            </div>
-          </div>
-          <div class="ln-h" style="margin:0 16.6%;height:1px;background:var(--dk-line)"></div>
-          <div style="display:flex;gap:12px">
-            {workerDelays.map((delay) => (
-              <div style="flex:1;min-width:0;display:flex;flex-direction:column;align-items:center">
-                <div class="ln" style={line}>
-                  <span class="dot" style={`${dot};animation-delay:${delay}`}></span>
-                </div>
-                <div style="width:100%;box-sizing:border-box;text-align:center;padding:12px 8px;border-radius:var(--radius-card);background:var(--dk-3)">
-                  Worker
-                </div>
-              </div>
-            ))}
-          </div>
-          <div style="margin-top:20px;padding:14px 16px;border-radius:var(--radius-card);background:var(--dk-3);text-align:center;color:var(--faint);font-weight:450">
-            Shared folder. Briefs and results exchanged as files.
-          </div>
+      <div
+        class="orbit"
+        role="img"
+        aria-label="An orchestrator at the center, three workers circling it, and a read-only supervisor watching from outside"
+      >
+        <div class="ring ring-outer"></div>
+        <div class="ring ring-inner"></div>
+        <div class="glowball" aria-hidden="true"></div>
+        <span class="node node-sup">Supervisor</span>
+        <span class="node node-core">Orchestrator</span>
+        <div class="spin" aria-hidden="true">
+          {workers.map((w, i) => (
+            <span class={`sat sat-${i}`}>
+              <span class="unspin">{w}</span>
+            </span>
+          ))}
         </div>
       </div>
     </div>

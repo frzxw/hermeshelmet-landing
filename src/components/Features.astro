@@ -1,130 +1,148 @@
 ---
-import Tile from "./Tile.astro";
-
-const bars = [
-  { n: 5, v: 0.62 },
-  { n: 4, v: 0.42 },
-  { n: 3, v: 0.3 },
-  { n: 2, v: 0.2 },
-  { n: 1, v: 0.06 },
+/* What's inside: one visual per idea, a few words each. */
+const routes = ["Plan first", "One worker", "Parallel"];
+const ring = [
+  { n: 1, v: 10 },
+  { n: 2, v: 12 },
+  { n: 3, v: 16 },
+  { n: 4, v: 14 },
 ];
-const routes = [
-  ["Add rate limiting to the API.", "No plan yet, so plan first."],
-  ["Fix the failing test.", "Small and clear, so one worker."],
-  ["Migrate to the new SDK.", "Large, so parallel workers."],
+let acc = 0;
+const C = 2 * Math.PI * 52;
+const files = ["plan.md", "brief-worker-1.md", "result-worker-1.md"];
+const gates = [
+  { name: "Spec", done: true },
+  { name: "Architecture", done: true },
+  { name: "Ship", done: false },
 ];
-const roles = [
-  { name: "Orchestrator", dark: true },
-  { name: "Supervisor", dark: false },
-  { name: "Workers", dark: false },
-];
-const base = "min-width:0";
-const h3 = "margin-top:24px";
 ---
 
 <section id="features" class="sec">
   <div class="wrap">
     <div class="sec-head center">
-      <p class="rv eyebrow kicker">Features</p>
-      <h2 class="rv h2" style="margin-top:16px">
-        Orchestrated, not just spawned.
+      <p class="rv kicker">What’s inside</p>
+      <h2 class="rv h2 big" style="margin-top:16px">
+        Orchestrated,
+        <br />
+        not just spawned.
       </h2>
-      <p class="rv rv2 lead">
-        Most multi-agent setups launch more agents. Helmet manages them, so every token goes to work that counts.
-      </p>
     </div>
 
-    <div style="margin-top:64px;display:flex;flex-wrap:wrap;gap:var(--gap)">
+    <div class="bento">
       <!-- Routing -->
-      <div class="card panel rv t-sky glow" style={`flex:1.6 1 480px;${base}`}>
-        <Tile glyph="route" bg="white" />
-        <h3 class="title" style={h3}>
-          Automatic routing.
-        </h3>
-        <p class="body-m" style="max-width:460px">
-          Say what you need. Helmet decides who does it. No keywords, no triggers.
-        </p>
-        <div style="margin-top:28px;display:flex;flex-direction:column;gap:8px;font-size:14px">
-          {routes.map(([ask, why]) => (
-            <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:14px 18px;border-radius:var(--radius-card);background:var(--white)">
-              <span style="font-weight:650">{ask}</span>
-              <span style="color:var(--muted)">{why}</span>
+      <article class="tcard rv span-4">
+        <div class="viz viz-aurora">
+          <div class="route">
+            <div class="route-ask">
+              Add rate limiting to the API.<span class="caret" aria-hidden="true"></span>
             </div>
-          ))}
+            <svg class="route-lines" viewBox="0 0 300 60" preserveAspectRatio="none" aria-hidden="true">
+              <path d="M150 0 C150 30 50 30 50 60" />
+              <path d="M150 0 L150 60" />
+              <path d="M150 0 C150 30 250 30 250 60" />
+            </svg>
+            <div class="route-opts">
+              {routes.map((r, i) => (
+                <span class:list={["ropt", `ro${i}`]}>{r}</span>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
+        <div class="cap">
+          <h3>Automatic routing</h3>
+          <p>Say what you need. Helmet decides who does it.</p>
+        </div>
+      </article>
 
       <!-- Context -->
-      <div class="card panel rv rv2 glow" style={`flex:1 1 300px;${base}`}>
-        <Tile glyph="bars" bg="white" />
-        <h3 class="title" style={h3}>
-          See your context.
-        </h3>
-        <p class="body-m">A live progress bar shows what fills the window: system prompt, skills, memory and more.</p>
-        <div style="position:relative;margin-top:28px;height:16px;border-radius:var(--radius-pill);overflow:hidden;background:var(--white)">
-          {bars.map((b) => (
-            <div class="cv" style={`background:var(--bar-${b.n});transform:scaleX(${b.v})`}></div>
-          ))}
+      <article class="tcard rv rv2 span-2">
+        <div class="viz viz-plain">
+          <svg class="donut" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="60" r="52" class="donut-bg" />
+            {ring.map((s) => {
+              const len = (s.v / 100) * C;
+              const el = (
+                <circle
+                  cx="60"
+                  cy="60"
+                  r="52"
+                  class="donut-seg"
+                  style={`stroke:var(--bar-${s.n});stroke-dasharray:${len - 2} ${C};stroke-dashoffset:${-acc}`}
+                />
+              );
+              acc += len;
+              return el;
+            })}
+          </svg>
+          <div class="donut-label">
+            <b>52%</b>
+            <span>of 200k</span>
+          </div>
         </div>
-        <div style="margin-top:10px;display:flex;justify-content:space-between;font-size:12px;color:var(--muted)">
-          <span>0</span>
-          <span>62% used</span>
-          <span>200k</span>
+        <div class="cap">
+          <h3>See your context</h3>
+          <p>Every token in the window, itemized.</p>
         </div>
-      </div>
+      </article>
 
-      <!-- Roles -->
-      <div class="card panel rv t-dusk glow" style={`flex:1 1 280px;${base}`}>
-        <Tile glyph="layers" bg="white" />
-        <h3 class="title" style={h3}>
-          Manage, judge, verify.
-        </h3>
-        <p class="body-m">
-          One orchestrator only manages. A read-only supervisor checks the result. Workers do the work.
-        </p>
-        <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:8px">
-          {roles.map((r) => (
-            <span
-              style={`display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:var(--radius-pill);font-size:14px;font-weight:600;${r.dark ? "background:var(--ink);color:var(--white)" : "background:var(--white)"}`}
-            >
-              {r.name}
+      <!-- Team -->
+      <article class="tcard rv span-2">
+        <div class="viz viz-dusk">
+          <div class="team">
+            <span class="av av-s" title="Supervisor">
+              S
             </span>
-          ))}
+            <span class="av av-o" title="Orchestrator">
+              O
+            </span>
+            <span class="av">W1</span>
+            <span class="av">W2</span>
+            <span class="av">W3</span>
+          </div>
         </div>
-      </div>
+        <div class="cap">
+          <h3>Manage, judge, verify</h3>
+          <p>One leads, one checks, the rest build.</p>
+        </div>
+      </article>
 
       <!-- Files -->
-      <div class="card panel rv rv2 t-clay glow" style={`flex:1 1 280px;${base}`}>
-        <Tile glyph="folder" bg="white" />
-        <h3 class="title" style={h3}>
-          Context through files.
-        </h3>
-        <p class="body-m">
-          Agents trade briefs and results in a shared folder, so nothing is repeated and caches stay warm.
-        </p>
-        <div style="margin-top:28px;padding:14px 18px;border-radius:var(--radius-card);background:var(--white);font-size:14px;line-height:1.8">
-          <div style="font-weight:650">shared/</div>
-          <div style="color:var(--muted)">&nbsp;&nbsp;plan.md</div>
-          <div style="color:var(--muted)">&nbsp;&nbsp;brief-worker-1.md</div>
-          <div style="color:var(--muted)">&nbsp;&nbsp;result-worker-1.md</div>
+      <article class="tcard rv rv2 span-2">
+        <div class="viz viz-clay">
+          <div class="fan" aria-hidden="true">
+            {files.map((f, i) => (
+              <div class:list={["fcard", `f${i}`]}>
+                <b>{f}</b>
+                <i />
+                <i />
+                <i class="short" />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+        <div class="cap">
+          <h3>Context through files</h3>
+          <p>Nothing re-read. Caches stay warm.</p>
+        </div>
+      </article>
 
-      <!-- Coding -->
-      <div class="card panel rv rv3 glow" style={`flex:1 1 280px;${base}`}>
-        <Tile glyph="code" bg="white" />
-        <h3 class="title" style={h3}>
-          Coding workflows first.
-        </h3>
-        <p class="body-m">
-          Built where Hermes ships no batteries: planning, implementing, testing and reviewing real code.
-        </p>
-        <div style="margin-top:28px;padding:14px 18px;border-radius:var(--radius-card);background:var(--white);font-size:14px;line-height:1.8;overflow:hidden">
-          <div style="color:var(--muted)">auth/middleware.ts</div>
-          <div style="color:var(--muted);text-decoration:line-through">&minus; if (!token) return next()</div>
-          <div style="font-weight:650">+ if (!token) return deny(401)</div>
+      <!-- Gates -->
+      <article class="tcard rv rv3 span-2">
+        <div class="viz viz-sky">
+          <ul class="gates" aria-hidden="true">
+            {gates.map((g) => (
+              <li class:list={[g.done && "done"]}>
+                <span>{g.name}</span>
+                <i class="tog" />
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
+        <div class="cap">
+          <h3>You approve the big calls</h3>
+          <p>Spec, architecture and ship wait for you.</p>
+        </div>
+      </article>
     </div>
   </div>
 </section>

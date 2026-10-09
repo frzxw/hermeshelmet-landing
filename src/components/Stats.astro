@@ -1,30 +1,25 @@
 ---
 import { stats } from "../data/site";
-const delays = ["rv", "rv rv2", "rv rv3"];
 ---
 
-<section class="band">
-  <div class="wrap grid3 lead-first">
-    {stats.map((s, i) => (
-      <div class:list={[delays[i], "card-w stat glow", i === 0 && "stat-hero"]}>
-        {"aria" in s ? (
-          <div
-            role="img"
-            aria-label={s.aria}
-            style="font-size:clamp(64px,9vw,112px);line-height:0.95;letter-spacing:-0.04em;font-weight:650"
-          >
-            <span aria-hidden="true">
-              ~<span class="cnt"></span>
-              <span class="sun">%</span>
-            </span>
-          </div>
-        ) : (
-          <div style="font-size:clamp(64px,9vw,112px);line-height:0.95;letter-spacing:-0.04em;font-weight:650">
-            {s.value}
-          </div>
-        )}
-        <p style="margin:0;max-width:260px;font-size:20px;line-height:26px;font-weight:600">{s.label}</p>
-      </div>
-    ))}
+<section class="sec" aria-label="Helmet in numbers">
+  <div class="numbers rv">
+    <div class="wrap nums">
+      {stats.map((s) => (
+        <div class="numcell">
+          {"aria" in s ? (
+            <div role="img" aria-label={s.aria} class="hugenum">
+              <span aria-hidden="true">
+                ~<span class="cnt"></span>
+                <span class="pct">%</span>
+              </span>
+            </div>
+          ) : (
+            <div class="hugenum">{s.value}</div>
+          )}
+          <p>{s.label}</p>
+        </div>
+      ))}
+    </div>
   </div>
 </section>

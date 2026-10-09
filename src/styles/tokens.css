@@ -12,13 +12,14 @@
   --line-soft: #efeeec;
   --terminal: #0f0f0f;
 
-  /* Panel shades. One quiet surface everywhere; the band steps a notch darker. */
-  --sky: #f5f5f4;
-  --sky-deep: #c9c5c0;
-  --clay: #f0efed;
-  --clay-deep: #c9c5c0;
-  --dusk: #f5f5f4;
-  --dusk-deep: #c9c5c0;
+  /* Aurora: the soft gradient from the demo frame */
+  --sky: #dcebff;
+  --sky-deep: #9fc4f2;
+  --clay: #f4ebdd;
+  --clay-deep: #c9ad8a;
+  --dusk: #e7e2ef;
+  --dusk-deep: #9d93b5;
+  --aurora: linear-gradient(160deg, var(--sky) 0%, var(--dusk) 55%, var(--clay) 100%);
   --sun: #141414; /* the one accent is ink */
   --nous: #0000f2; /* Hermes Agent blue, only inside its logo */
   --night: #121212;
