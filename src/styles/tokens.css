@@ -12,12 +12,25 @@
   --line-soft: #ededed;
   --terminal: #0f0f0f;
 
+  /* Tints pulled from the clay art: hero sky, helmet clay, footer dusk, and the sun */
+  --sky: #dcebff;
+  --sky-deep: #9fc4f2;
+  --clay: #f4ebdd;
+  --clay-deep: #b89c7c;
+  --dusk: #e7e2ef;
+  --dusk-deep: #8f86a6;
+  --sun: #f0642c;
+  --night: #1c1a24; /* dark band, the footer scene after sunset */
+  --dk-2: #262331;
+  --dk-3: #312d3e;
+  --dk-line: #4a4559;
+
   /* Context-bar shades, darkest to lightest */
-  --bar-1: #0a0a0a;
-  --bar-2: #404040;
-  --bar-3: #737373;
-  --bar-4: #a3a3a3;
-  --bar-5: #d4d4d4;
+  --bar-1: #141414;
+  --bar-2: #8f86a6;
+  --bar-3: #9fc4f2;
+  --bar-4: #d9bf9c;
+  --bar-5: #e3e0e8;
 
   --radius-frame: 32px;
   --radius-panel: 24px;

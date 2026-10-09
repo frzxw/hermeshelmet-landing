@@ -131,9 +131,15 @@
 .frame {
   padding: 40px;
   border-radius: var(--radius-frame);
-  background: var(--surface);
+  background: linear-gradient(160deg, var(--sky) 0%, var(--dusk) 60%, var(--clay) 100%);
   box-sizing: border-box;
 }
+/* On the tinted frame, controls go translucent white */
+.frame .btn-2,
+.frame .seg-group {
+  background: rgba(255, 255, 255, 0.55);
+}
+
 /* Gray tile: no border, no shadow */
 .panel {
   padding: 32px;
@@ -143,9 +149,35 @@
 }
 /* Full-width gray band with white cards on it */
 .band {
-  margin-top: 160px;
+  max-width: 1680px;
+  margin: 16px 16px 0;
   padding: 120px 0;
-  background: var(--surface);
+  border-radius: var(--radius-frame);
+  background: var(--clay);
+}
+@media (min-width: 1712px) {
+  .band {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+/* Section label with a small sun dot */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: var(--ink);
+}
+.kicker::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--sun);
+}
+.dark .kicker {
+  color: var(--white);
 }
 .card-w {
   padding: 40px;
@@ -164,10 +196,150 @@
   gap: 48px;
   min-height: 280px;
 }
+.grid3.lead-first {
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+}
 .grid3 {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--gap);
+}
+
+/* ---- Character ---- */
+.h2-xl {
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+.stmt {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 24px;
+}
+.stmt-h .soft {
+  color: var(--muted);
+}
+.stmt-art {
+  position: relative;
+  justify-self: end;
+  width: min(380px, 100%);
+}
+.stmt-art::before {
+  content: "";
+  position: absolute;
+  inset: 8% 4% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--sky), transparent);
+  z-index: -1;
+}
+.ln-sun {
+  background: var(--sun) !important;
+}
+
+/* Tinted panels, one per clay color */
+.t-sky {
+  --tint: var(--sky);
+  --tint-deep: var(--sky-deep);
+}
+.t-clay {
+  --tint: var(--clay);
+  --tint-deep: var(--clay-deep);
+}
+.t-dusk {
+  --tint: var(--dusk);
+  --tint-deep: var(--dusk-deep);
+}
+.panel[class*="t-"] {
+  background: var(--tint);
+}
+.num {
+  display: block;
+  font-size: 56px;
+  line-height: 1;
+  font-weight: 650;
+  letter-spacing: -0.03em;
+  color: var(--tint-deep, var(--faint));
+}
+
+/* Cursor spotlight on panels (position set by scripts/glow.ts) */
+.glow {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.glow::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.75),
+    transparent 70%
+  );
+  transition: opacity 0.35s ease;
+}
+.glow:hover::after {
+  opacity: 1;
+}
+
+/* Dark band: the footer's sky after sunset */
+.dark-sec {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.dark {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 120px 0;
+  border-radius: var(--radius-frame);
+  background:
+    radial-gradient(60% 80% at 85% 0%, rgba(143, 134, 166, 0.35), transparent 70%),
+    radial-gradient(40% 60% at 10% 100%, rgba(240, 100, 44, 0.18), transparent 70%), var(--night);
+  color: var(--white);
+}
+.dark .lead {
+  color: #b9b4c6;
+}
+.dk-eyebrow {
+  color: #b9b4c6;
+}
+.dk-panel {
+  padding: 40px 32px;
+  border-radius: var(--radius-frame);
+  background: var(--dk-2);
+  box-sizing: border-box;
+  font-size: 14px;
+  font-weight: 600;
+}
+.orch {
+  padding: 12px 24px;
+  border-radius: var(--radius-card);
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: 0 0 0 6px rgba(240, 100, 44, 0.18);
+}
+.dark .dot {
+  background: var(--sun) !important;
+}
+
+/* Featured stat */
+.stat-hero {
+  background: var(--night);
+  color: var(--white);
+}
+.stat-hero.glow::after,
+.dark .glow::after {
+  background: radial-gradient(320px circle at var(--mx, 50%) var(--my, 50%), rgba(240, 100, 44, 0.16), transparent 70%);
+}
+.stat-hero p {
+  color: #d9d5e3;
+}
+.stat-hero .sun {
+  color: var(--sun);
 }
 
 /* ---- Segmented controls ---- */
@@ -281,7 +453,8 @@
   height: 36px;
 }
 .mq-t {
-  font-size: 32px;
+  font-size: 44px;
+  letter-spacing: -0.02em;
   line-height: 1.13;
   font-weight: 650;
 }
@@ -318,7 +491,7 @@
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--sun);
 }
 .pill[data-state="active"] .pulse {
   display: inline-block;
@@ -361,6 +534,10 @@
 .faq-item {
   border-radius: var(--radius-panel);
   background: var(--surface);
+  transition: background 0.3s ease;
+}
+.faq-item[open] {
+  background: var(--sky);
 }
 .faq-item summary {
   display: flex;
@@ -408,7 +585,8 @@
 }
 
 @media (max-width: 900px) {
-  .grid3 {
+  .grid3,
+  .grid3.lead-first {
     grid-template-columns: minmax(0, 1fr);
   }
 }
@@ -425,6 +603,28 @@
   .card-w {
     padding: 24px;
   }
+  .stmt {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stmt-art {
+    order: -1;
+    justify-self: start;
+    width: 180px;
+  }
+  .dark {
+    padding: 80px 0;
+    border-radius: var(--radius-panel);
+  }
+  .dark-sec {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+  .dk-panel {
+    padding: 28px 16px;
+  }
+  .num {
+    font-size: 44px;
+  }
   .step {
     flex-direction: column;
     gap: 12px;
@@ -434,8 +634,9 @@
     gap: 24px;
   }
   .band {
-    margin-top: 112px;
-    padding: 88px 0;
+    margin: 8px 8px 0;
+    padding: 80px 0;
+    border-radius: var(--radius-panel);
   }
   .hero-in {
     padding: 132px 20px 0;

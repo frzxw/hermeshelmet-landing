@@ -4,17 +4,24 @@ const delays = ["rv", "rv rv2", "rv rv3"];
 ---
 
 <section class="band">
-  <div class="wrap grid3">
+  <div class="wrap grid3 lead-first">
     {stats.map((s, i) => (
-      <div class:list={[delays[i], "card-w stat"]}>
+      <div class:list={[delays[i], "card-w stat glow", i === 0 && "stat-hero"]}>
         {"aria" in s ? (
-          <div role="img" aria-label={s.aria} style="font-size:clamp(52px,8vw,80px);line-height:0.98;font-weight:650">
+          <div
+            role="img"
+            aria-label={s.aria}
+            style="font-size:clamp(64px,9vw,112px);line-height:0.95;letter-spacing:-0.04em;font-weight:650"
+          >
             <span aria-hidden="true">
-              ~<span class="cnt"></span>%
+              ~<span class="cnt"></span>
+              <span class="sun">%</span>
             </span>
           </div>
         ) : (
-          <div style="font-size:clamp(52px,8vw,80px);line-height:0.98;font-weight:650">{s.value}</div>
+          <div style="font-size:clamp(64px,9vw,112px);line-height:0.95;letter-spacing:-0.04em;font-weight:650">
+            {s.value}
+          </div>
         )}
         <p style="margin:0;max-width:260px;font-size:20px;line-height:26px;font-weight:600">{s.label}</p>
       </div>

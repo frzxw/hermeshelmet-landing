@@ -28,7 +28,8 @@ const pillStyle =
       <div
         role="group"
         aria-label="Choose a request"
-        style="display:flex;gap:4px;padding:4px;border-radius:var(--radius-pill);background:var(--fill);max-width:100%;overflow-x:auto"
+        class="seg-group"
+        style="display:flex;gap:4px;padding:4px;border-radius:var(--radius-pill);max-width:100%;overflow-x:auto"
       >
         {scenarios.map((label, i) => (
           <button
@@ -49,7 +50,10 @@ const pillStyle =
 
     <div style="padding:12px;border-radius:var(--radius-panel);background:var(--white);display:flex;flex-wrap:wrap;gap:12px;text-align:left">
       <!-- Context window -->
-      <div style="flex:1 1 320px;min-width:0;padding:24px;border-radius:var(--radius-card);background:var(--surface);box-sizing:border-box">
+      <div
+        style="flex:1 1 320px;min-width:0;padding:24px;border-radius:var(--radius-card);background:var(--surface);box-sizing:border-box"
+        class="glow"
+      >
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
           <span style="font-size:16px;font-weight:650">Context</span>
           <span data-ctx-text style="font-size:14px;color:var(--muted)">
@@ -75,7 +79,10 @@ const pillStyle =
       </div>
 
       <!-- Agents -->
-      <div style="flex:1.5 1 420px;min-width:0;padding:24px;border-radius:var(--radius-card);background:var(--surface);box-sizing:border-box">
+      <div
+        style="flex:1.5 1 420px;min-width:0;padding:24px;border-radius:var(--radius-card);background:var(--surface);box-sizing:border-box"
+        class="glow"
+      >
         <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
           <span style="font-size:16px;font-weight:650">Agents</span>
           <span style="font-size:14px;color:var(--muted)">Routing: automatic</span>

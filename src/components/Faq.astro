@@ -4,9 +4,12 @@ import { faqs } from "../data/site";
 
 <section id="faq" class="sec">
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:40px 48px;align-items:flex-start">
-    <h2 class="rv stick h2" style="flex:1 1 280px;min-width:0;position:sticky;top:120px">
-      Everything you need to know.
-    </h2>
+    <div class="rv stick" style="flex:1 1 280px;min-width:0;position:sticky;top:120px">
+      <p class="eyebrow kicker">FAQ</p>
+      <h2 class="h2" style="margin-top:16px">
+        Everything you need to know.
+      </h2>
+    </div>
     <div class="rv rv2" style="flex:1.6 1 440px;min-width:0;display:flex;flex-direction:column;gap:12px">
       {faqs.map((f, i) => (
         <details class="faq-item" name="faq" open={i === 0}>
