@@ -1,12 +1,13 @@
 /* Design tokens. Monochrome, neutral grays (Mobbin-style). */
 :root {
   --white: #ffffff;
-  --ink: #0a0a0a;
+  --ink: #141414;
   --graphite: #262626;
   --muted-strong: #525252;
-  --muted: #6b6b6b;
+  --muted: #707070;
   --faint: #a3a3a3;
-  --surface: #f5f5f5;
+  --surface: #f4f4f4; /* rgba(64,64,64,.06) on white */
+  --fill: #ebebeb; /* rgba(64,64,64,.08) on white: secondary buttons */
   --line: #e5e5e5;
   --line-soft: #ededed;
   --terminal: #0f0f0f;
@@ -18,6 +19,7 @@
   --bar-4: #a3a3a3;
   --bar-5: #d4d4d4;
 
+  --radius-frame: 32px;
   --radius-panel: 24px;
   --radius-card: 16px;
   --radius-pill: 9999px;
@@ -26,6 +28,19 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --font: "Hanken Grotesk Variable", "Hanken Grotesk", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  /* Type scale, after mobbin.com */
+  --fs-h2: 44px;
+  --lh-h2: 48px;
+  --ls-h2: -0.4px;
+  --fs-lead: 20px;
+  --lh-lead: 26px;
+  --fs-title: 24px;
+  --lh-title: 30px;
+
+  --container: 1045px;
+  --gutter: 24px;
+  --gap: 20px;
+
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 

@@ -55,6 +55,121 @@
   display: inline-flex;
 }
 
+/* Secondary pill: soft gray fill, no border (Mobbin's "See plans") */
+.btn-2 {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 44px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--fill);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* ---- Section type ---- */
+.h2 {
+  margin: 0;
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  font-weight: 650;
+  text-wrap: balance;
+}
+/* Two-tone headline: the second sentence steps back to gray */
+.h2 .soft {
+  color: var(--muted);
+}
+.lead {
+  margin: 20px 0 0;
+  max-width: 560px;
+  font-size: var(--fs-lead);
+  line-height: var(--lh-lead);
+  font-weight: 400;
+  color: var(--muted);
+  text-wrap: pretty;
+}
+.sec-head {
+  max-width: 720px;
+}
+.sec-head.center {
+  margin: 0 auto;
+  text-align: center;
+}
+.sec-head.center .lead {
+  margin-left: auto;
+  margin-right: auto;
+}
+.eyebrow {
+  margin: 0;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.2px;
+  color: var(--muted);
+}
+.title {
+  margin: 0;
+  font-size: var(--fs-title);
+  line-height: var(--lh-title);
+  font-weight: 650;
+}
+.body-m {
+  margin: 10px 0 0;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--muted);
+}
+
+/* ---- Surfaces ---- */
+/* Large gray frame around a product demo, like Mobbin's app window */
+.frame {
+  padding: 40px;
+  border-radius: var(--radius-frame);
+  background: var(--surface);
+  box-sizing: border-box;
+}
+/* Gray tile: no border, no shadow */
+.panel {
+  padding: 32px;
+  border-radius: var(--radius-frame);
+  background: var(--surface);
+  box-sizing: border-box;
+}
+/* Full-width gray band with white cards on it */
+.band {
+  margin-top: 160px;
+  padding: 120px 0;
+  background: var(--surface);
+}
+.card-w {
+  padding: 40px;
+  border-radius: var(--radius-panel);
+  background: var(--white);
+  box-sizing: border-box;
+}
+.step {
+  display: flex;
+  gap: 24px;
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 48px;
+  min-height: 280px;
+}
+.grid3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
 /* ---- Segmented controls ---- */
 .seg {
   background: transparent;
@@ -77,7 +192,6 @@
 }
 .card:hover {
   transform: translateY(-4px);
-  border-color: var(--line);
 }
 .card:active {
   transform: translateY(-1px) scale(0.995);
@@ -245,7 +359,7 @@
 
 /* ---- FAQ ---- */
 .faq-item {
-  border-radius: var(--radius-card);
+  border-radius: var(--radius-panel);
   background: var(--surface);
 }
 .faq-item summary {
@@ -253,10 +367,11 @@
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  min-height: 56px;
-  padding: 16px 20px;
-  border-radius: var(--radius-card);
-  font-size: 16px;
+  min-height: 64px;
+  padding: 20px 24px;
+  border-radius: var(--radius-panel);
+  font-size: 17px;
+  line-height: 24px;
   font-weight: 600;
   cursor: pointer;
   list-style: none;
@@ -273,9 +388,9 @@
 }
 .faq-item p {
   margin: 0;
-  padding: 0 56px 20px 20px;
+  padding: 0 64px 24px 24px;
   font-size: 16px;
-  line-height: 1.4;
+  line-height: 24px;
   color: var(--muted);
 }
 
@@ -292,7 +407,36 @@
   opacity: 0;
 }
 
+@media (max-width: 900px) {
+  .grid3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 @media (max-width: 760px) {
+  .frame {
+    padding: 12px;
+    border-radius: var(--radius-panel);
+  }
+  .panel {
+    padding: 24px;
+    border-radius: var(--radius-panel);
+  }
+  .card-w {
+    padding: 24px;
+  }
+  .step {
+    flex-direction: column;
+    gap: 12px;
+  }
+  .stat {
+    min-height: 0;
+    gap: 24px;
+  }
+  .band {
+    margin-top: 112px;
+    padding: 88px 0;
+  }
   .hero-in {
     padding: 132px 20px 0;
   }

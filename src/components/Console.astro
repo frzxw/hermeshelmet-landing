@@ -21,99 +21,96 @@ const pillStyle =
   id="console"
   class="in-rise"
   data-console
-  style="animation-delay:.9s;max-width:1040px;margin:72px auto 0;padding:0 24px;box-sizing:border-box"
+  style="animation-delay:.9s;max-width:calc(var(--container) + 2 * var(--gutter));margin:80px auto 0;padding:0 var(--gutter);box-sizing:border-box"
 >
-  <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px">
-    <div
-      role="group"
-      aria-label="Choose a request"
-      style="display:flex;gap:4px;padding:4px;border-radius:var(--radius-pill);background:var(--surface);max-width:100%;overflow-x:auto"
-    >
-      {scenarios.map((label, i) => (
-        <button
-          class="seg"
-          type="button"
-          data-scenario={i}
-          aria-pressed={i === 0 ? "true" : "false"}
-          style="flex:none;height:40px;padding:0 16px;border:0;border-radius:var(--radius-pill);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer"
-        >
-          {label}
-        </button>
-      ))}
-    </div>
-    <button
-      class="btn"
-      type="button"
-      data-console-toggle
-      style="display:inline-flex;align-items:center;height:40px;padding:0 16px;border:0;border-radius:var(--radius-pill);background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer"
-    >
-      Pause demo
-    </button>
-  </div>
-
-  <div style="padding:12px;border-radius:var(--radius-panel);border:1px solid var(--line-soft);background:var(--white);display:flex;flex-wrap:wrap;gap:12px;text-align:left">
-    <!-- Context window -->
-    <div style="flex:1 1 320px;min-width:0;padding:24px;border-radius:var(--radius-card);background:var(--surface);box-sizing:border-box">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-        <span style="font-size:16px;font-weight:650">Context</span>
-        <span data-ctx-text style="font-size:14px;color:var(--muted)">
-          60% · 120k / 200k
-        </span>
-      </div>
-      <div style="position:relative;margin-top:16px;height:16px;border-radius:var(--radius-pill);overflow:hidden;background:var(--white)">
-        {[5, 4, 3, 2, 1].map((n) => (
-          <div class="cv" data-bar={n} style={`background:var(--bar-${n})`}></div>
-        ))}
-      </div>
-      <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;font-size:14px">
-        {legend.map((row) => (
-          <div style="display:flex;align-items:center;gap:10px">
-            <span style={`width:10px;height:10px;border-radius:30%;background:${row.color}`}></span>
-            <span style="flex:1">{row.label}</span>
-            <span style="color:var(--muted)" data-conv-text={row.size ? undefined : ""}>
-              {row.size ?? "54k"}
-            </span>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    <!-- Agents -->
-    <div style="flex:1.5 1 420px;min-width:0;padding:24px;border-radius:var(--radius-card);background:var(--surface);box-sizing:border-box">
-      <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
-        <span style="font-size:16px;font-weight:650">Agents</span>
-        <span style="font-size:14px;color:var(--muted)">Routing: automatic</span>
-      </div>
-      <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;font-size:14px">
-        <div class="arow" style={rowStyle}>
-          <span style="font-weight:650;min-width:92px">Orchestrator</span>
-          <span data-o-msg style="flex:1;min-width:0;color:var(--muted)">
-            Reading the request.
-          </span>
-          <span
-            data-o-state
-            style="display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:var(--radius-pill);background:var(--ink);color:var(--white);font-size:12px;font-weight:600"
+  <div class="frame">
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px">
+      <div
+        role="group"
+        aria-label="Choose a request"
+        style="display:flex;gap:4px;padding:4px;border-radius:var(--radius-pill);background:var(--fill);max-width:100%;overflow-x:auto"
+      >
+        {scenarios.map((label, i) => (
+          <button
+            class="seg"
+            type="button"
+            data-scenario={i}
+            aria-pressed={i === 0 ? "true" : "false"}
+            style="flex:none;height:40px;padding:0 16px;border:0;border-radius:var(--radius-pill);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer"
           >
-            Reading
+            {label}
+          </button>
+        ))}
+      </div>
+      <button class="btn btn-2" type="button" data-console-toggle style="height:48px">
+        Pause demo
+      </button>
+    </div>
+
+    <div style="padding:12px;border-radius:var(--radius-panel);background:var(--white);display:flex;flex-wrap:wrap;gap:12px;text-align:left">
+      <!-- Context window -->
+      <div style="flex:1 1 320px;min-width:0;padding:24px;border-radius:var(--radius-card);background:var(--surface);box-sizing:border-box">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-size:16px;font-weight:650">Context</span>
+          <span data-ctx-text style="font-size:14px;color:var(--muted)">
+            60% · 120k / 200k
           </span>
         </div>
-        {[1, 2, 3].map((n) => (
+        <div style="position:relative;margin-top:16px;height:16px;border-radius:var(--radius-pill);overflow:hidden;background:var(--white)">
+          {[5, 4, 3, 2, 1].map((n) => (
+            <div class="cv" data-bar={n} style={`background:var(--bar-${n})`}></div>
+          ))}
+        </div>
+        <div style="margin-top:20px;display:flex;flex-direction:column;gap:12px;font-size:14px">
+          {legend.map((row) => (
+            <div style="display:flex;align-items:center;gap:10px">
+              <span style={`width:10px;height:10px;border-radius:30%;background:${row.color}`}></span>
+              <span style="flex:1">{row.label}</span>
+              <span style="color:var(--muted)" data-conv-text={row.size ? undefined : ""}>
+                {row.size ?? "54k"}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Agents -->
+      <div style="flex:1.5 1 420px;min-width:0;padding:24px;border-radius:var(--radius-card);background:var(--surface);box-sizing:border-box">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:12px">
+          <span style="font-size:16px;font-weight:650">Agents</span>
+          <span style="font-size:14px;color:var(--muted)">Routing: automatic</span>
+        </div>
+        <div style="margin-top:16px;display:flex;flex-direction:column;gap:8px;font-size:14px">
           <div class="arow" style={rowStyle}>
-            <span style="font-weight:650;min-width:92px">Worker {n}</span>
-            <span data-worker-task={n} style="flex:1;min-width:0;color:var(--muted)"></span>
-            <span class="pill" data-worker-pill={n} data-state="idle" style={pillStyle}>
+            <span style="font-weight:650;min-width:92px">Orchestrator</span>
+            <span data-o-msg style="flex:1;min-width:0;color:var(--muted)">
+              Reading the request.
+            </span>
+            <span
+              data-o-state
+              style="display:inline-flex;align-items:center;height:26px;padding:0 12px;border-radius:var(--radius-pill);background:var(--ink);color:var(--white);font-size:12px;font-weight:600"
+            >
+              Reading
+            </span>
+          </div>
+          {[1, 2, 3].map((n) => (
+            <div class="arow" style={rowStyle}>
+              <span style="font-weight:650;min-width:92px">Worker {n}</span>
+              <span data-worker-task={n} style="flex:1;min-width:0;color:var(--muted)"></span>
+              <span class="pill" data-worker-pill={n} data-state="idle" style={pillStyle}>
+                <span class="pulse"></span>
+                <span data-label>Idle</span>
+              </span>
+            </div>
+          ))}
+          <div class="arow" style={`${rowStyle};border:1px dashed var(--faint)`}>
+            <span style="font-weight:650;min-width:92px">Supervisor</span>
+            <span style="flex:1;min-width:0;color:var(--muted)">Read-only. Checks the work against the plan.</span>
+            <span class="pill" data-supervisor-pill data-state="idle" style={pillStyle}>
               <span class="pulse"></span>
               <span data-label>Idle</span>
             </span>
           </div>
-        ))}
-        <div class="arow" style={`${rowStyle};border:1px dashed var(--faint)`}>
-          <span style="font-weight:650;min-width:92px">Supervisor</span>
-          <span style="flex:1;min-width:0;color:var(--muted)">Read-only. Checks the work against the plan.</span>
-          <span class="pill" data-supervisor-pill data-state="idle" style={pillStyle}>
-            <span class="pulse"></span>
-            <span data-label>Idle</span>
-          </span>
         </div>
       </div>
     </div>

@@ -18,26 +18,29 @@ const roles = [
   { name: "Supervisor", dark: false },
   { name: "Workers", dark: false },
 ];
-const base = "min-width:0;padding:32px;border-radius:var(--radius-panel);box-sizing:border-box";
-const h3 = "margin:24px 0 0;font-size:24px;line-height:1.25";
-const p = "margin:12px 0 0;font-size:16px;line-height:1.4;color:var(--muted)";
+const base = "min-width:0";
+const h3 = "margin-top:24px";
 ---
 
 <section id="features" class="sec">
   <div class="wrap">
-    <h2 class="rv" style="margin:0;max-width:760px;font-size:clamp(34px,5.6vw,56px);line-height:1.02">
-      Orchestrated, not just spawned.
-    </h2>
-    <p class="rv rv2" style="margin:24px 0 0;max-width:600px;font-size:20px;line-height:1.38;font-weight:300">
-      Most multi-agent setups launch more agents. Helmet manages them, so every token goes to work that counts.
-    </p>
+    <div class="sec-head center">
+      <h2 class="rv h2">Orchestrated, not just spawned.</h2>
+      <p class="rv rv2 lead">
+        Most multi-agent setups launch more agents. Helmet manages them, so every token goes to work that counts.
+      </p>
+    </div>
 
-    <div style="margin-top:56px;display:flex;flex-wrap:wrap;gap:16px">
+    <div style="margin-top:64px;display:flex;flex-wrap:wrap;gap:var(--gap)">
       <!-- Routing -->
-      <div class="card rv" style={`flex:1.6 1 480px;${base};border:1px solid var(--surface);background:var(--surface)`}>
+      <div class="card panel rv" style={`flex:1.6 1 480px;${base}`}>
         <Tile glyph="route" bg="white" />
-        <h3 style={h3}>Automatic routing.</h3>
-        <p style={`${p};max-width:460px`}>Say what you need. Helmet decides who does it. No keywords, no triggers.</p>
+        <h3 class="title" style={h3}>
+          Automatic routing.
+        </h3>
+        <p class="body-m" style="max-width:460px">
+          Say what you need. Helmet decides who does it. No keywords, no triggers.
+        </p>
         <div style="margin-top:28px;display:flex;flex-direction:column;gap:8px;font-size:14px">
           {routes.map(([ask, why]) => (
             <div style="display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:14px 18px;border-radius:var(--radius-card);background:var(--white)">
@@ -49,14 +52,13 @@ const p = "margin:12px 0 0;font-size:16px;line-height:1.4;color:var(--muted)";
       </div>
 
       <!-- Context -->
-      <div
-        class="card rv rv2"
-        style={`flex:1 1 300px;${base};border:1px solid var(--line-soft);background:var(--white)`}
-      >
-        <Tile glyph="bars" />
-        <h3 style={h3}>See your context.</h3>
-        <p style={p}>A live progress bar shows what fills the window: system prompt, skills, memory and more.</p>
-        <div style="position:relative;margin-top:28px;height:16px;border-radius:var(--radius-pill);overflow:hidden;background:var(--surface)">
+      <div class="card panel rv rv2" style={`flex:1 1 300px;${base}`}>
+        <Tile glyph="bars" bg="white" />
+        <h3 class="title" style={h3}>
+          See your context.
+        </h3>
+        <p class="body-m">A live progress bar shows what fills the window: system prompt, skills, memory and more.</p>
+        <div style="position:relative;margin-top:28px;height:16px;border-radius:var(--radius-pill);overflow:hidden;background:var(--white)">
           {bars.map((b) => (
             <div class="cv" style={`background:var(--bar-${b.n});transform:scaleX(${b.v})`}></div>
           ))}
@@ -69,14 +71,18 @@ const p = "margin:12px 0 0;font-size:16px;line-height:1.4;color:var(--muted)";
       </div>
 
       <!-- Roles -->
-      <div class="card rv" style={`flex:1 1 280px;${base};border:1px solid var(--line-soft);background:var(--white)`}>
-        <Tile glyph="layers" />
-        <h3 style={h3}>Manage, judge, verify.</h3>
-        <p style={p}>One orchestrator only manages. A read-only supervisor checks the result. Workers do the work.</p>
+      <div class="card panel rv" style={`flex:1 1 280px;${base}`}>
+        <Tile glyph="layers" bg="white" />
+        <h3 class="title" style={h3}>
+          Manage, judge, verify.
+        </h3>
+        <p class="body-m">
+          One orchestrator only manages. A read-only supervisor checks the result. Workers do the work.
+        </p>
         <div style="margin-top:28px;display:flex;flex-wrap:wrap;gap:8px">
           {roles.map((r) => (
             <span
-              style={`display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:var(--radius-pill);font-size:14px;font-weight:600;${r.dark ? "background:var(--ink);color:var(--white)" : "background:var(--surface)"}`}
+              style={`display:inline-flex;align-items:center;height:32px;padding:0 14px;border-radius:var(--radius-pill);font-size:14px;font-weight:600;${r.dark ? "background:var(--ink);color:var(--white)" : "background:var(--white)"}`}
             >
               {r.name}
             </span>
@@ -85,13 +91,12 @@ const p = "margin:12px 0 0;font-size:16px;line-height:1.4;color:var(--muted)";
       </div>
 
       <!-- Files -->
-      <div
-        class="card rv rv2"
-        style={`flex:1 1 280px;${base};border:1px solid var(--surface);background:var(--surface)`}
-      >
+      <div class="card panel rv rv2" style={`flex:1 1 280px;${base}`}>
         <Tile glyph="folder" bg="white" />
-        <h3 style={h3}>Context through files.</h3>
-        <p style={p}>
+        <h3 class="title" style={h3}>
+          Context through files.
+        </h3>
+        <p class="body-m">
           Agents trade briefs and results in a shared folder, so nothing is repeated and caches stay warm.
         </p>
         <div style="margin-top:28px;padding:14px 18px;border-radius:var(--radius-card);background:var(--white);font-size:14px;line-height:1.8">
@@ -103,14 +108,15 @@ const p = "margin:12px 0 0;font-size:16px;line-height:1.4;color:var(--muted)";
       </div>
 
       <!-- Coding -->
-      <div
-        class="card rv rv3"
-        style={`flex:1 1 280px;${base};border:1px solid var(--line-soft);background:var(--white)`}
-      >
-        <Tile glyph="code" />
-        <h3 style={h3}>Coding workflows first.</h3>
-        <p style={p}>Built where Hermes ships no batteries: planning, implementing, testing and reviewing real code.</p>
-        <div style="margin-top:28px;padding:14px 18px;border-radius:var(--radius-card);background:var(--surface);font-size:14px;line-height:1.8;overflow:hidden">
+      <div class="card panel rv rv3" style={`flex:1 1 280px;${base}`}>
+        <Tile glyph="code" bg="white" />
+        <h3 class="title" style={h3}>
+          Coding workflows first.
+        </h3>
+        <p class="body-m">
+          Built where Hermes ships no batteries: planning, implementing, testing and reviewing real code.
+        </p>
+        <div style="margin-top:28px;padding:14px 18px;border-radius:var(--radius-card);background:var(--white);font-size:14px;line-height:1.8;overflow:hidden">
           <div style="color:var(--muted)">auth/middleware.ts</div>
           <div style="color:var(--muted);text-decoration:line-through">&minus; if (!token) return next()</div>
           <div style="font-weight:650">+ if (!token) return deny(401)</div>
