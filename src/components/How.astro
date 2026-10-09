@@ -1,6 +1,5 @@
 ---
 import InstallStepper from "./InstallStepper.astro";
-import Tile from "./Tile.astro";
 
 const chip =
   "display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:var(--radius-pill);font-size:13px;font-weight:600";
@@ -21,12 +20,14 @@ const modelRows = [
       <p class="lead">Three steps from nothing to a Hermes that works like a team.</p>
     </div>
 
-    <div style="flex:1.4 1 460px;min-width:0;display:flex;flex-direction:column;gap:var(--gap)">
+    <div style="flex:1.4 1 460px;min-width:0;display:flex;flex-direction:column">
       <!-- 1 -->
-      <div class="rv panel step glow">
-        <Tile numeral={1} bg="white" />
+      <div class="rv step-row">
+        <span class="idx" aria-hidden="true">
+          01
+        </span>
         <div style="flex:1;min-width:0">
-          <h3 class="title" style="margin-top:10px;font-size:20px;line-height:26px">
+          <h3 class="title" style="font-size:20px;line-height:26px">
             Install with one command.
           </h3>
           <p class="body-m" style="max-width:460px">
@@ -38,19 +39,21 @@ const modelRows = [
       </div>
 
       <!-- 2 -->
-      <div class="rv panel step glow">
-        <Tile numeral={2} bg="white" />
+      <div class="rv step-row">
+        <span class="idx" aria-hidden="true">
+          02
+        </span>
         <div style="flex:1;min-width:0">
-          <h3 class="title" style="margin-top:10px;font-size:20px;line-height:26px">
+          <h3 class="title" style="font-size:20px;line-height:26px">
             Plug in your models.
           </h3>
           <p class="body-m" style="max-width:460px">
             Add whichever models you already have. Helmet routes between them for you. No tiers or categories to learn.
           </p>
-          <div style="margin-top:24px;padding:4px 20px;border-radius:var(--radius-card);background:var(--white)">
+          <div style="margin-top:24px;padding:4px 20px;border-radius:var(--radius-card);background:var(--surface)">
             {modelRows.map((r, i) => (
               <div
-                style={`display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;font-size:15px;${i ? "border-top:1px solid var(--line-soft)" : ""}`}
+                style={`display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0;font-size:15px;${i ? "border-top:1px solid var(--line)" : ""}`}
               >
                 <span style="font-weight:600">{r.name}</span>
                 <span style={r.strong ? "font-weight:600" : "color:var(--muted)"}>{r.status}</span>
@@ -61,17 +64,19 @@ const modelRows = [
       </div>
 
       <!-- 3 -->
-      <div class="rv panel step glow">
-        <Tile numeral={3} bg="white" />
+      <div class="rv step-row">
+        <span class="idx" aria-hidden="true">
+          03
+        </span>
         <div style="flex:1;min-width:0">
-          <h3 class="title" style="margin-top:10px;font-size:20px;line-height:26px">
+          <h3 class="title" style="font-size:20px;line-height:26px">
             Describe the work.
           </h3>
           <p class="body-m" style="max-width:460px">
             Helmet reads the situation. No plan yet? It plans first. Then each piece goes to the right agent.
           </p>
           <div style="margin-top:24px">
-            <div style="display:flex;align-items:center;padding:14px 18px;border-radius:var(--radius-card);background:var(--white);font-size:15px">
+            <div style="display:flex;align-items:center;padding:14px 18px;border-radius:var(--radius-card);background:var(--surface);font-size:15px">
               Add rate limiting to the API.
               <span
                 class="caret"

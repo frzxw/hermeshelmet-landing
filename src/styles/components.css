@@ -163,14 +163,42 @@
 }
 /* Section label */
 .kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-  color: var(--ink);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
 }
 .dark .kicker {
-  color: var(--white);
+  color: #a8a5a0;
+}
+/* Editorial column: a short ink rule over a mono index */
+.col-rule {
+  padding-top: 20px;
+  border-top: 1px solid var(--ink);
+}
+.idx {
+  display: block;
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.step-row {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr);
+  gap: 16px;
+  padding: 40px 0;
+  border-top: 1px solid var(--line);
+}
+.step-row:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+.step-row .idx {
+  padding-top: 5px;
 }
 .card-w {
   padding: 40px;
@@ -472,6 +500,8 @@
 }
 .mq-t {
   font-size: 44px;
+  color: var(--faint);
+  transition: color 0.3s ease;
   letter-spacing: -0.02em;
   line-height: 1.13;
   font-weight: 650;
@@ -550,23 +580,19 @@
 
 /* ---- FAQ ---- */
 .faq-item {
-  border-radius: var(--radius-panel);
-  background: var(--surface);
-  transition: background 0.3s ease;
+  border-bottom: 1px solid var(--line);
 }
-.faq-item[open] {
-  background: var(--fill);
+.faq-item:first-child {
+  border-top: 1px solid var(--line);
 }
 .faq-item summary {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 16px;
-  min-height: 64px;
-  padding: 20px 24px;
-  border-radius: var(--radius-panel);
-  font-size: 17px;
-  line-height: 24px;
+  padding: 24px 0;
+  font-size: 18px;
+  line-height: 26px;
   font-weight: 600;
   cursor: pointer;
   list-style: none;
@@ -576,14 +602,17 @@
 }
 .faq-item .chev {
   flex: none;
+  color: var(--muted);
   transition: transform 0.4s var(--ease-out);
 }
 .faq-item[open] .chev {
-  transform: rotate(180deg);
+  transform: rotate(45deg);
+  color: var(--ink);
 }
 .faq-item p {
   margin: 0;
-  padding: 0 64px 24px 24px;
+  padding: 0 48px 28px 0;
+  max-width: 560px;
   font-size: 16px;
   line-height: 24px;
   color: var(--muted);
@@ -610,6 +639,11 @@
 }
 
 @media (max-width: 760px) {
+  .step-row {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+    padding: 32px 0;
+  }
   .frame {
     padding: 12px;
     border-radius: var(--radius-panel);
@@ -700,4 +734,7 @@
   .hero-in {
     padding: 120px 16px 0;
   }
+}
+.marquee > div:hover .mq-t {
+  color: var(--ink);
 }
