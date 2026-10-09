@@ -1,46 +1,56 @@
 ---
-const points = [
-  {
-    title: "Memory, kept.",
-    body: "Hermes’ long-term memory stays at the core. Helmet builds on it instead of replacing it.",
-    cls: "rv",
-  },
-  {
-    title: "Harness, added.",
-    body: "Planning, routing and verification arrive built in. The batteries a coding agent needs, already in the box.",
-    cls: "rv rv2",
-  },
-  {
-    title: "Tokens, saved.",
-    body: "Agents exchange context through shared files, so work isn’t re-read and caches stay warm.",
-    cls: "rv rv3",
-  },
+import wing from "../assets/hermes-agent-wing.svg";
+import wordmark from "../assets/hermes-agent-wordmark.svg?raw";
+
+// Each word lights up from gray to ink as it scrolls into view.
+const first = "Hermes remembers everything.".split(" ");
+const second = "It just wasn’t ready to".split(" ");
+const pillars = [
+  { k: "Memory", v: "kept" },
+  { k: "Harness", v: "added" },
+  { k: "Tokens", v: "saved" },
 ];
 ---
 
-<section class="sec">
-  <div class="wrap">
-    <h2 class="rv" style="margin:0;max-width:900px;font-size:clamp(34px,5.6vw,56px);line-height:1.02">
-      Hermes remembers everything. It just wasn&rsquo;t ready to{" "}
-      <span style="position:relative;display:inline-block">
-        work.
-        <span
-          class="ln-h"
-          aria-hidden="true"
-          style="position:absolute;left:0;right:0;bottom:-2px;height:6px;border-radius:var(--radius-pill);background:var(--ink)"
-        ></span>
+<section class="sec stmt2" style="overflow:hidden">
+  <div class="wrap" style="text-align:center">
+    <figure class="badge-float" aria-label="Built on Hermes Agent by Nous Research">
+      <div class="tilt">
+        <div class="float">
+          <div class="nous-badge">
+            <img src={wing.src} width={wing.width} height={wing.height} alt="Hermes Agent logo" />
+          </div>
+        </div>
+      </div>
+      <figcaption class="built-on">
+        <span class="kicker">Built on</span>
+        <span class="wordmark" role="img" aria-label="Hermes-Agent" set:html={wordmark} />
+      </figcaption>
+    </figure>
+
+    <h2 class="h2 mega" aria-label="Hermes remembers everything. It just wasn’t ready to work.">
+      <span aria-hidden="true">
+        {first.map((w) => (
+          <span class="lit">{w} </span>
+        ))}
+        <br />
+        {second.map((w) => (
+          <span class="lit soft">{w} </span>
+        ))}
+        <span class="lit" style="position:relative;display:inline-block">
+          work.
+          <span class="ln-h ln-sun"></span>
+        </span>
       </span>
     </h2>
-    <p class="rv rv2" style="margin:24px 0 0;max-width:600px;font-size:20px;line-height:1.38;font-weight:300">
-      Helmet keeps the memory and adds the harness around it.
-    </p>
-    <div style="margin-top:80px;display:flex;flex-wrap:wrap;gap:40px 32px">
-      {points.map((p) => (
-        <div class={p.cls} style="flex:1 1 260px;min-width:0">
-          <h3 style="margin:0;font-size:24px;line-height:1.25">{p.title}</h3>
-          <p style="margin:12px 0 0;font-size:16px;line-height:1.4;color:var(--muted)">{p.body}</p>
-        </div>
+
+    <ul class="pillars" aria-label="What Helmet changes">
+      {pillars.map((p, i) => (
+        <li class:list={["rv", i === 1 && "rv2", i === 2 && "rv3"]}>
+          <span>{p.k}</span>
+          <b>{p.v}</b>
+        </li>
       ))}
-    </div>
+    </ul>
   </div>
 </section>

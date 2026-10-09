@@ -1,87 +1,20 @@
 ---
 import InstallStepper from "./InstallStepper.astro";
-import Tile from "./Tile.astro";
-
-const chip =
-  "display:inline-flex;align-items:center;height:30px;padding:0 14px;border-radius:var(--radius-pill);font-size:13px;font-weight:600";
-const modelRows = [
-  { name: "Your fastest model", status: "Connected", strong: false },
-  { name: "Your strongest model", status: "Connected", strong: false },
-  { name: "Your local model", status: "Auto-routed", strong: true },
-];
 ---
 
 <section id="how" class="sec">
-  <div class="wrap" style="display:flex;flex-wrap:wrap;gap:48px;align-items:flex-start">
-    <div class="rv stick" style="flex:1 1 300px;min-width:0;position:sticky;top:120px">
-      <h2 style="margin:0;font-size:clamp(32px,5vw,44px);line-height:1.13">
-        No jargon, no slash commands, no setup maze.
+  <div class="wrap">
+    <div class="sec-head center">
+      <p class="rv kicker">How it works</p>
+      <h2 class="rv h2 big" style="margin-top:16px">
+        One command.
+        <br />
+        No setup maze.
       </h2>
-      <p style="margin:24px 0 0;font-size:20px;line-height:1.38;font-weight:300">
-        Three steps from nothing to a Hermes that works like a team.
-      </p>
+      <p class="rv rv2 lead">No Hermes yet? It installs that too, then asks which models you have.</p>
     </div>
-
-    <div style="flex:1.4 1 460px;min-width:0">
-      <!-- 1 -->
-      <div class="rv" style="display:flex;gap:24px;padding:40px 0;border-top:1px solid var(--line)">
-        <Tile numeral={1} />
-        <div style="flex:1;min-width:0">
-          <h3 style="margin:4px 0 0;font-size:24px;line-height:1.25">Install with one command.</h3>
-          <p style="margin:12px 0 0;max-width:460px;font-size:16px;line-height:1.4;color:var(--muted)">
-            No Hermes yet? Helmet sets that up too. Hermes itself, including its default UI, becomes the supercharged
-            version.
-          </p>
-          <InstallStepper />
-        </div>
-      </div>
-
-      <!-- 2 -->
-      <div class="rv" style="display:flex;gap:24px;padding:40px 0;border-top:1px solid var(--line)">
-        <Tile numeral={2} />
-        <div style="flex:1;min-width:0">
-          <h3 style="margin:4px 0 0;font-size:24px;line-height:1.25">Plug in your models.</h3>
-          <p style="margin:12px 0 0;max-width:460px;font-size:16px;line-height:1.4;color:var(--muted)">
-            Add whichever models you already have. Helmet routes between them for you. No tiers or categories to learn.
-          </p>
-          <div style="margin-top:24px">
-            {modelRows.map((r, i) => (
-              <div
-                style={`display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;font-size:15px;${i ? "border-top:1px solid var(--line-soft)" : ""}`}
-              >
-                <span style="font-weight:600">{r.name}</span>
-                <span style={r.strong ? "font-weight:600" : "color:var(--muted)"}>{r.status}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      <!-- 3 -->
-      <div class="rv" style="display:flex;gap:24px;padding:40px 0;border-top:1px solid var(--line)">
-        <Tile numeral={3} />
-        <div style="flex:1;min-width:0">
-          <h3 style="margin:4px 0 0;font-size:24px;line-height:1.25">Describe the work.</h3>
-          <p style="margin:12px 0 0;max-width:460px;font-size:16px;line-height:1.4;color:var(--muted)">
-            Helmet reads the situation. No plan yet? It plans first. Then each piece goes to the right agent.
-          </p>
-          <div style="margin-top:24px">
-            <div style="display:flex;align-items:center;padding:14px 18px;border-radius:var(--radius-card);background:var(--line-soft);font-size:15px">
-              Add rate limiting to the API.
-              <span
-                class="caret"
-                aria-hidden="true"
-                style="display:inline-block;width:2px;height:18px;margin-left:2px;background:var(--ink)"
-              ></span>
-            </div>
-            <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px">
-              <span style={`${chip};background:var(--ink);color:var(--white)`}>Plan first</span>
-              <span style={`${chip};background:var(--surface)`}>3 workers</span>
-              <span style={`${chip};background:var(--surface)`}>Verify</span>
-            </div>
-          </div>
-        </div>
-      </div>
+    <div class="frame frame-aurora install rv">
+      <InstallStepper />
     </div>
   </div>
 </section>

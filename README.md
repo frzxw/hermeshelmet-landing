@@ -59,3 +59,5 @@ Any static host works. On Vercel, import the repo: the Astro preset is detected 
 ## Credits
 
 Provider marks come from [`@lobehub/icons-static-svg`](https://github.com/lobehub/lobe-icons) and belong to their respective owners. They are shown only to indicate compatibility.
+
+The Hermes Agent wing (`src/assets/hermes-agent-wing.svg`) and the HERMES-AGENT wordmark (`src/assets/hermes-agent-wordmark.svg`, traced from the [hermes-agent README banner](https://github.com/NousResearch/hermes-agent)) are from [Nous Research](https://hermes-agent.nousresearch.com/) and belong to them. They identify the agent Helmet builds on.

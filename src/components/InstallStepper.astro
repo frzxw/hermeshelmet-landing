@@ -10,12 +10,12 @@ const tabStyle =
   "flex:none;height:36px;padding:0 10px;border:0;border-radius:var(--radius-pill);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer";
 ---
 
-<div data-stepper style="margin-top:24px">
+<div data-stepper>
   <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 12px;margin-bottom:12px">
     <div
       role="group"
       aria-label="Installation steps"
-      style="display:flex;padding:4px;border-radius:var(--radius-pill);background:var(--surface);max-width:100%;overflow-x:auto"
+      style="display:flex;padding:4px;border-radius:var(--radius-pill);background:var(--fill);max-width:100%;overflow-x:auto"
     >
       {tabs.map((t, i) => (
         <button class="seg" type="button" data-step-tab={i} style={tabStyle}>
@@ -23,12 +23,7 @@ const tabStyle =
         </button>
       ))}
     </div>
-    <button
-      class="btn"
-      type="button"
-      data-step-toggle
-      style="display:inline-flex;align-items:center;height:36px;padding:0 14px;border:0;border-radius:var(--radius-pill);background:var(--surface);color:var(--ink);font-family:inherit;font-size:14px;font-weight:600;cursor:pointer"
-    >
+    <button class="btn btn-2" type="button" data-step-toggle style="height:44px;padding:0 16px;font-size:14px">
       Pause
     </button>
   </div>

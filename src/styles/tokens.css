@@ -1,23 +1,49 @@
-/* Design tokens. Monochrome, neutral grays (Mobbin-style). */
+/* Design tokens. Semi-monochrome: warm stone grays around one ink. */
 :root {
   --white: #ffffff;
-  --ink: #0a0a0a;
-  --graphite: #262626;
-  --muted-strong: #525252;
-  --muted: #6b6b6b;
-  --faint: #a3a3a3;
-  --surface: #f5f5f5;
-  --line: #e5e5e5;
-  --line-soft: #ededed;
+  --ink: #141414;
+  --graphite: #292524;
+  --muted-strong: #57534e;
+  --muted: #73706b;
+  --faint: #a8a29e;
+  --surface: #f5f5f4;
+  --fill: #ebeae8; /* secondary buttons */
+  --line: #e7e5e4;
+  --line-soft: #efeeec;
   --terminal: #0f0f0f;
 
-  /* Context-bar shades, darkest to lightest */
-  --bar-1: #0a0a0a;
-  --bar-2: #404040;
-  --bar-3: #737373;
-  --bar-4: #a3a3a3;
-  --bar-5: #d4d4d4;
+  /* Aurora: the soft gradient from the demo frame */
+  --sky: #dcebff;
+  --sky-deep: #9fc4f2;
+  --clay: #f4ebdd;
+  --clay-deep: #c9ad8a;
+  --dusk: #e7e2ef;
+  --dusk-deep: #9d93b5;
+  --lav: #c9bfd6;
+  --lav-soft: #e6e0ef;
+  --sky-ink: #86ade6;
+  --lav-ink: #a596c4;
+  --p1: #dcebff;
+  --p2: #e1e7fc;
+  --p3: #e5e2f7;
+  --p4: #ddd6ee;
+  --p5: #d2c9e2;
+  --aurora: linear-gradient(160deg, var(--p1), var(--p5));
+  --sun: #141414; /* the one accent is ink */
+  --nous: #0000f2; /* Hermes Agent blue, only inside its logo */
+  --night: #121212;
+  --dk-2: #1c1c1b;
+  --dk-3: #262625;
+  --dk-line: #3d3c3a;
 
+  /* Context-bar shades, darkest to lightest */
+  --bar-1: #141414;
+  --bar-2: #57534e;
+  --bar-3: #8a8580;
+  --bar-4: #b5b0aa;
+  --bar-5: #dcd9d5;
+
+  --radius-frame: 32px;
   --radius-panel: 24px;
   --radius-card: 16px;
   --radius-pill: 9999px;
@@ -26,6 +52,19 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
   --font: "Hanken Grotesk Variable", "Hanken Grotesk", -apple-system, "Helvetica Neue", Arial, sans-serif;
+  /* Type scale, after mobbin.com */
+  --fs-h2: 44px;
+  --lh-h2: 48px;
+  --ls-h2: -0.4px;
+  --fs-lead: 20px;
+  --lh-lead: 26px;
+  --fs-title: 24px;
+  --lh-title: 30px;
+
+  --container: 1045px;
+  --gutter: 24px;
+  --gap: 20px;
+
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 }
 

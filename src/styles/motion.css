@@ -187,6 +187,19 @@
     transform: none;
   }
 }
+@keyframes hh-lit {
+  from {
+    color: var(--line);
+  }
+}
+@keyframes hh-tilt {
+  from {
+    transform: rotate(-12deg) translateY(40px) scale(0.9);
+  }
+  to {
+    transform: rotate(8deg) translateY(-30px) scale(1.04);
+  }
+}
 @keyframes hh-near-l {
   to {
     transform: translateX(56px);
@@ -247,6 +260,15 @@
   .float2 {
     animation: hh-float 7s ease-in-out -2s infinite;
   }
+  .ropt {
+    animation: hh-route 6s linear infinite;
+  }
+  .ropt.ro1 {
+    animation-delay: 2s;
+  }
+  .ropt.ro2 {
+    animation-delay: 4s;
+  }
   .dot {
     animation: hh-flow 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
   }
@@ -294,6 +316,16 @@
       animation-timeline: view();
       animation-range: entry 30% cover 38%;
     }
+    .lit {
+      animation: hh-lit linear both;
+      animation-timeline: view();
+      animation-range: entry 40% cover 45%;
+    }
+    .tilt {
+      animation: hh-tilt linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
     .cnt {
       animation: hh-count linear both;
       animation-timeline: view();
@@ -329,5 +361,18 @@
       animation-timeline: view();
       animation-range: exit 0% exit 100%;
     }
+  }
+}
+
+@keyframes hh-route {
+  0%,
+  30% {
+    background: var(--ink);
+    color: var(--white);
+  }
+  34%,
+  100% {
+    background: rgba(255, 255, 255, 0.6);
+    color: var(--muted-strong);
   }
 }
