@@ -1,6 +1,5 @@
 ---
-import { Image } from "astro:assets";
-import helmet from "../assets/helmet.webp";
+import wing from "../assets/hermes-agent-wing.svg";
 
 const points = [
   {
@@ -45,13 +44,16 @@ const second = "It just wasn’t ready to".split(" ");
           </span>
         </span>
       </h2>
-      <div class="stmt-art" aria-hidden="true">
+      <figure class="stmt-art">
         <div class="tilt">
           <div class="float">
-            <Image src={helmet} alt="" width={480} style="display:block;width:100%;height:auto" />
+            <div class="nous-badge">
+              <img src={wing.src} width={wing.width} height={wing.height} alt="Hermes Agent logo" />
+            </div>
           </div>
         </div>
-      </div>
+        <figcaption class="eyebrow">Built on Hermes Agent by Nous Research</figcaption>
+      </figure>
     </div>
     <p class="rv rv2 lead">Helmet keeps the memory and adds the harness around it.</p>
     <div class="grid3" style="margin-top:64px">

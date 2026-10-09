@@ -223,7 +223,30 @@
 .stmt-art {
   position: relative;
   justify-self: end;
-  width: min(380px, 100%);
+  width: min(300px, 100%);
+  margin: 0;
+  text-align: center;
+}
+.stmt-art figcaption {
+  margin-top: 20px;
+}
+/* Hermes Agent badge: Nous Research's wing in its own blue, on a rounded card */
+.nous-badge {
+  display: grid;
+  place-items: center;
+  width: 72%;
+  margin: 0 auto;
+  aspect-ratio: 40 / 56;
+  border: 3px solid var(--nous);
+  border-radius: 9%;
+  background: var(--white);
+  box-sizing: border-box;
+}
+.nous-badge img {
+  display: block;
+  width: 50%;
+  height: auto;
+  transform: rotate(14deg);
 }
 .stmt-art::before {
   content: "";
@@ -609,7 +632,11 @@
   .stmt-art {
     order: -1;
     justify-self: start;
-    width: 180px;
+    width: 160px;
+    text-align: left;
+  }
+  .stmt-art .nous-badge {
+    margin: 0;
   }
   .dark {
     padding: 80px 0;
