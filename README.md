@@ -1,6 +1,10 @@
-# hermes-helmet-landing
+# Hermes Helmet landing
 
 Landing page for [hermeshelmet.com](https://hermeshelmet.com): an open-source layer that gives Hermes Agent a planner, parallel workers and a verifier, while using fewer tokens.
+
+Live at [hermes-helmet-landing.vercel.app](https://hermes-helmet-landing.vercel.app).
+
+![Hermes Helmet landing page](docs/preview.png)
 
 Built with [Astro](https://astro.build). Static output, no client framework, a few small TypeScript modules for the interactive demos.
 
